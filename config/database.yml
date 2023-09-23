@@ -1,9 +1,3 @@
-production:
-  <<: *default
-  database: Rem_production
-  username: Rem
-  password: <%= ENV["REM_DATABASE_PASSWORD"] %>
-
 default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
