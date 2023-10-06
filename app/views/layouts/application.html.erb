@@ -27,9 +27,10 @@
           </form>
 
           <div class="text-end">
-            <button type="button" class="btn btn-outline-light me-2">Login</button>
-            <button type="button" class="btn btn-warning">Sign-up</button>
+            <%= link_to "Login", "#", class: "btn btn-outline-light me-2", role: "button" %>
+            <%= link_to "Sign-up", new_user_registration_path, class: "btn btn-warning", role: "button" %>
           </div>
+
         </div>
       </div>
     </header>
