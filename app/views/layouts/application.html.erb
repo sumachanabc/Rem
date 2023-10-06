@@ -19,7 +19,7 @@
           </a>
 
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><%= link_to "Home", root_path, class: "nav-link px-2 text-secondary" %></li>
+            <><%= link_to "Home", root_path, class: "nav-link px-2 text-secondary" %></li>
           </ul>
 
           <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
@@ -27,9 +27,20 @@
           </form>
 
           <div class="text-end">
-            <button type="button" class="btn btn-outline-light me-2">Login</button>
-            <button type="button" class="btn btn-warning">Sign-up</button>
+            <% if user_signed_in? %> <!-- ユーザーがログインしている場合 -->
+              <span>
+                ようこそ、<%= "#{current_user.last_name} #{current_user.first_name}" %> さん
+              </span>
+              <span class="btn btn-warning">
+                <%= "担当物件" %>
+              </span>
+              <%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-light me-2", role: "button"  %>
+            <% else %> <!-- ユーザーがログインしていない場合 -->
+              <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light me-2", role: "button" %>
+              <%= link_to "Sign-up", new_user_registration_path, class: "btn btn-warning", role: "button" %>
+            <% end %>
           </div>
+
         </div>
       </div>
     </header>
