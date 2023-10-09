@@ -6,19 +6,20 @@ class Condo < ApplicationRecord
   belongs_to :user
 
   # バリデーション
-  validates :condo_name, presence: true
-  validates :condo_address, presence: true
-  validates :floor, presence: true
-  validates :total_number_of_unit, presence: true
-  validates :completion_year, presence: true
-  validates :structure_id, presence: true
-  validates :site_area, presence: true
-  validates :total_floor_area, presence: true
-  validates :management_type_id, presence: true
-  validates :management_company_address, presence: true
-  validates :management_company_name, presence: true
-  validates :management_company_phone_number, presence: true
-  validates :maintenance_fee, presence: true
-  validates :repair_reserve_fund, presence: true
-
+  with_options presence: true do
+    validates :condo_name
+    validates :condo_address
+    validates :floor
+    validates :total_number_of_unit
+    validates :completion_year
+    validates :structure_id, numericality: { other_than: 1 }
+    validates :site_area
+    validates :total_floor_area
+    validates :management_type_id, numericality: { other_than: 1 }
+    validates :management_company_address
+    validates :management_company_name
+    validates :management_company_phone_number
+    validates :maintenance_fee
+    validates :repair_reserve_fund
+  end
 end

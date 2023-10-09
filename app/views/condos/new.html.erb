@@ -1,0 +1,105 @@
+<h1>マンション登録</h1>
+
+<%= form_with(model: @condo, local: true) do |f| %>
+
+<%= render 'shared/error_messages', model: f.object %>
+
+  <div class="field">
+    <%= f.label :condo_name %>
+    <%= f.text_field :condo_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :condo_address %>
+    <%= f.text_field :condo_address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :floor %>
+    <%= f.text_field :floor %>
+  </div>
+
+  <div class="field">
+    <%= f.label :basement_floor %>
+    <%= f.text_field :basement_floor %>
+  </div>
+
+  <div class="field">
+    <%= f.label :total_number_of_unit %>
+    <%= f.text_field :total_number_of_unit %>
+  </div>
+
+  <div class="field">
+    <%= f.label :completion_year %>
+    <%= f.text_field :completion_year %>
+  </div>
+
+  <div class="field">
+    <%= f.collection_select(:structure_id, Structure.all, :id, :name, {}, { class: "select-box", id: "item-structure" }) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :site_area %>
+    <%= f.text_field :site_area %>
+  </div>
+
+  <div class="field">
+    <%= f.label :total_floor_area %>
+    <%= f.text_field :total_floor_area %>
+  </div>
+
+  <div class="field">
+    <%= f.collection_select(:management_type_id, ManagementType.all, :id, :name, {}, { class: "select-box", id: "item-management-type" }) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :management_company_address %>
+    <%= f.text_field :management_company_address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :management_company_name %>
+    <%= f.text_field :management_company_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :management_company_phone_number %>
+    <%= f.text_field :management_company_phone_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :parking_space %>
+    <%= f.text_field :parking_space %>
+  </div>
+
+  <div class="field">
+    <%= f.label :bicycle_parking_space %>
+    <%= f.text_field :bicycle_parking_space %>
+  </div>
+
+  <div class="field">
+    <%= f.label :maintenance_fee %>
+    <%= f.text_field :maintenance_fee %>
+  </div>
+
+  <div class="field">
+    <%= f.label :repair_reserve_fund %>
+    <%= f.text_field :repair_reserve_fund %>
+  </div>
+
+<div class="field">
+  <%= f.label :user_id, '担当者を選択' %>
+  <%= f.select :user_id, options_for_select(
+    @users_for_select,
+    @selected_user_id),
+    prompt: '担当者を選択してください' %>
+</div>
+
+
+
+  <div class="actions">
+    <%= f.submit 'Create' %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', root_path %>

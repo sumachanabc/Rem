@@ -11,8 +11,8 @@ class CreateCondos < ActiveRecord::Migration[7.0]
       t.float   :site_area, null: false
       t.float   :total_floor_area, null: false
       t.string  :management_type_id, null: false
-      t.string  :management_company_address, null: false
       t.string  :management_company_name, null: false
+      t.string  :management_company_address, null: false
       t.string  :management_company_phone_number, null: false
       t.integer :parking_space
       t.integer :bicycle_parking_space
