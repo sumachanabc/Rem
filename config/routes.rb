@@ -4,5 +4,6 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
+  resources :condos
   root to: 'condos#index'
 end
