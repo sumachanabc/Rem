@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :condos
+
   # roleを設定
   enum role: { employee: 0, admin: 1, manage: 2 }
 

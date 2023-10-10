@@ -1,0 +1,35 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        last_name: 姓
+        first_name: 名
+        last_name_kana: 姓（カナ）
+        first_name_kana: 名（カナ）
+      condo:
+        text: テキスト
+        image: 画像
+        condo_name: マンション名
+        postal_code: 郵便番号
+        condo_address: 住所
+        floor: 階数
+        basement_floor: 地下階数
+        total_number_of_unit: 総戸数
+        completion_year: 竣工年
+        structure_id: 構造
+        site_area: 敷地面積
+        total_floor_area: 延べ面積
+        parking_space: 駐車場(台)
+        bicycle_parking_space: 駐輪場(台)
+        maintenance_fee: 月額管理費㎡単価(円)
+        repair_reserve_fund: 月額修繕積立金㎡単価(円)
+        management_company_name: 管理会社名
+        management_company_postal_code: 管理会社郵便番号
+        management_company_address: 管理会社住所
+        management_company_phone_number: 管理会社電話番号
+        management_type_id: 管理方式
+
+  # activemodel:   # Formオブジェクトを用いた場合
+  #    attributes:
+  #      order_object:
+  #  post_code: 郵便番号

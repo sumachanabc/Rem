@@ -1,0 +1,173 @@
+<%= form_with(model: @condo, data: { turbo: false }, local: true) do |f| %>
+
+  <%= render 'shared/error_messages', model: f.object %>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :condo_name, 'マンション名', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :condo_name, class:"input-default" %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :postal_code, '郵便番号', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :postal_code, class: "input-default", placeholder:"例）123-4567"%>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :condo_address, '住所', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :condo_address, class: "input-default" %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :floor, '階数', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :floor, class: "input-default" %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :basement_floor, '地下階数', class: "form-text" %>
+      <span class="indispensable2">任意</span>
+    </div>
+    <%= f.text_field :basement_floor, class: "input-default" %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :total_number_of_unit, '総戸数', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :total_number_of_unit, class: "input-default" %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :completion_year, '竣工年', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :completion_year, class: "input-default" %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :structure_id, '構造', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.collection_select(:structure_id, Structure.all, :id, :name, {}, { class: "input-default" }) %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :site_area, '敷地面積', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :site_area, class: "input-default" %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :total_floor_area, '延べ面積', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :total_floor_area, class: "input-default" %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :parking_space, '駐車場(台)', class: "form-text" %>
+      <span class="indispensable2">任意</span>
+    </div>
+    <%= f.text_field :parking_space, class: "input-default" %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :bicycle_parking_space, '駐輪場(台)', class: "form-text" %>
+      <span class="indispensable2">任意</span>
+    </div>
+    <%= f.text_field :bicycle_parking_space, class: "input-default" %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :maintenance_fee, '月額管理費㎡単価(円)', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :maintenance_fee, class: "input-default" %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :repair_reserve_fund, '月額修繕積立金㎡単価(円)', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :repair_reserve_fund, class: "input-default" %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :management_company_name, '管理会社名', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :management_company_name, class: "input-default" %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :management_company_postal_code, '管理会社郵便番号', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :management_company_postal_code, class: "input-default", placeholder:"例）123-4567"%>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :management_company_address, '管理会社住所', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :management_company_address, class: "input-default" %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :management_company_phone_number, '管理会社電話番号', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :management_company_phone_number, class: "input-default" %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :management_type_id, '管理方式', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.collection_select(:management_type_id, ManagementType.all, :id, :name, {}, { class: "input-default" }) %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :user_id, '担当者を選択', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.select :user_id, options_for_select(
+      @users_for_select,
+      @selected_user_id),
+      { class: "input-default" } %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit '作成', data: { turbo: false } %>
+    <%= link_to '戻る', root_path, class: "back-btn" %>
+  </div>
+
+<% end %>

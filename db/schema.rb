@@ -10,7 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_05_083029) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_09_051919) do
+  create_table "condos", charset: "utf8", force: :cascade do |t|
+    t.string "condo_name", null: false
+    t.string "postal_code", null: false
+    t.string "condo_address", null: false
+    t.integer "floor", null: false
+    t.integer "basement_floor"
+    t.integer "total_number_of_unit", null: false
+    t.integer "completion_year", null: false
+    t.string "structure_id", null: false
+    t.float "site_area", null: false
+    t.float "total_floor_area", null: false
+    t.integer "parking_space"
+    t.integer "bicycle_parking_space"
+    t.float "maintenance_fee", null: false
+    t.float "repair_reserve_fund", null: false
+    t.string "management_company_name", null: false
+    t.string "management_company_postal_code", null: false
+    t.string "management_company_address", null: false
+    t.string "management_company_phone_number", null: false
+    t.string "management_type_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_condos_on_user_id"
+  end
+
   create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "last_name", null: false
     t.string "first_name", null: false
@@ -28,4 +54,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_083029) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "condos", "users"
 end
