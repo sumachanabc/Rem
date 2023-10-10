@@ -78,13 +78,13 @@ class CondosController < ApplicationController
 
   def condo_params
     params.require(:condo).permit(
-      :condo_name, :condo_address, :floor, :basement_floor,
+      :condo_name, :postal_code, :condo_address, :floor, :basement_floor,
       :total_number_of_unit, :completion_year, :structure_id,
       :site_area, :total_floor_area, :management_type_id,
-      :management_company_address, :management_company_name,
-      :management_company_phone_number, :parking_space,
-      :bicycle_parking_space, :maintenance_fee, :repair_reserve_fund,
-      :user_id
+      :management_company_name, :management_company_postal_code,
+      :management_company_address, :management_company_phone_number,
+      :parking_space,:bicycle_parking_space, :maintenance_fee,
+      :repair_reserve_fund,:user_id
     )
   end
 

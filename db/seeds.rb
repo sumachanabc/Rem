@@ -68,11 +68,13 @@ structure_id = Structure.find_by(name: 'SRC造').id
 
 # 管理会社情報
 management_company_name = 'TECH管理株式会社'
+management_company_postal_code = '101-1010'
 management_company_address = '東京都千代田区4-5-6'
 management_company_phone_number = '03-1234-5678'
 
 Condo.create!(
   condo_name: 'サンコート',
+  postal_code: '111-1111',
   condo_address: '東京都渋谷区1-2-3',
   floor: 4,
   basement_floor: nil,
@@ -83,6 +85,7 @@ Condo.create!(
   total_floor_area: 1800.0,
   management_type_id: management_type_id,
   management_company_name: management_company_name,
+  management_company_postal_code: management_company_postal_code,
   management_company_address: management_company_address,
   management_company_phone_number: management_company_phone_number,
   parking_space: nil,
@@ -94,6 +97,7 @@ Condo.create!(
 
 Condo.create!(
   condo_name: 'モダンパーク',
+  postal_code: '111-2222',
   condo_address: '東京都渋谷区1-2-3',
   floor: 4,
   basement_floor: nil,
@@ -104,6 +108,7 @@ Condo.create!(
   total_floor_area: 2000.0,
   management_type_id: management_type_id,
   management_company_name: management_company_name,
+  management_company_postal_code: management_company_postal_code,
   management_company_address: management_company_address,
   management_company_phone_number: management_company_phone_number,
   parking_space: nil,
@@ -115,6 +120,7 @@ Condo.create!(
 
 Condo.create!(
   condo_name: 'サンライズヒルズ',
+  postal_code: '111-3333',
   condo_address: '東京都新宿区4-5-6',
   floor: 5,
   basement_floor: nil,
@@ -125,6 +131,7 @@ Condo.create!(
   total_floor_area: 2100.0,
   management_type_id: management_type_id,
   management_company_name: management_company_name,
+  management_company_postal_code: management_company_postal_code,
   management_company_address: management_company_address,
   management_company_phone_number: management_company_phone_number,
   parking_space: nil,
@@ -136,6 +143,7 @@ Condo.create!(
 
 Condo.create!(
   condo_name: 'グリーンコート',
+  postal_code: '111-4444',
   condo_address: '東京都港区7-8-9',
   floor: 6,
   basement_floor: nil,
@@ -146,6 +154,7 @@ Condo.create!(
   total_floor_area: 2200.0,
   management_type_id: management_type_id,
   management_company_name: management_company_name,
+  management_company_postal_code: management_company_postal_code,
   management_company_address: management_company_address,
   management_company_phone_number: management_company_phone_number,
   parking_space: nil,
@@ -157,6 +166,7 @@ Condo.create!(
 
 Condo.create!(
   condo_name: 'アーバンパレス',
+  postal_code: '111-5555',
   condo_address: '東京都中央区10-11-12',
   floor: 3,
   basement_floor: nil,
@@ -167,6 +177,7 @@ Condo.create!(
   total_floor_area: 1900.0,
   management_type_id: management_type_id,
   management_company_name: management_company_name,
+  management_company_postal_code: management_company_postal_code,
   management_company_address: management_company_address,
   management_company_phone_number: management_company_phone_number,
   parking_space: nil,
