@@ -8,6 +8,10 @@ class CondoPolicy < ApplicationPolicy
     true
   end
 
+  def details?
+    true
+  end
+
   def create?
     user.admin? || user.manage?
   end

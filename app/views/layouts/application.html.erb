@@ -35,18 +35,27 @@
 
               <% if current_user.admin? %>
                 <%# 管理者の場合 %>
-                <%= link_to "ユーザー登録", new_user_registration_path, data: { turbo: false }, class: "btn btn-warning", role: "button" %>
+                <%= link_to "社員登録", new_user_registration_path, data: { turbo: false }, class: "btn btn-warning", role: "button" %>
+                <%= link_to "マンション登録", new_condo_path, data: { turbo: false }, class: "btn btn-warning", role: "button" %>
                 <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-light me-2", role: "button"  %>
 
               <% elsif current_user.manage? %>
                 <%# マネージャーの場合 %>
+                <%= link_to "マンション登録", new_condo_path, data: { turbo: false }, class: "btn btn-warning", role: "button" %>
                 <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-light me-2", role: "button"  %>
 
               <% else %>
                 <%# 社員の場合 %>
-                <span class="btn btn-warning">
-                  <%= "担当物件" %>
-                </span>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    担当物件
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <% current_user.condos.each do |condo| %>
+                      <li><%= link_to condo.condo_name, condo_path(condo), class: "dropdown-item" %></li>
+                    <% end %>
+                  </ul>
+                </div>
                 <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-light", role: "button"  %>
               <% end %>
 

@@ -1,5 +1,5 @@
 class CondosController < ApplicationController
-  before_action :set_condo, only: [:show, :edit, :update, :destroy]
+  before_action :set_condo, only: [:show, :details, :edit, :update, :destroy]
   after_action :verify_authorized, except: [:index, :show]
 
   def index
@@ -8,6 +8,10 @@ class CondosController < ApplicationController
   end
 
   def show
+    authorize @condo
+  end
+
+  def details
     authorize @condo
   end
 
@@ -31,7 +35,7 @@ class CondosController < ApplicationController
 
       # create アクションに対する認可を実行
       authorize @condo
-      
+
       @users_for_select = users_for_select
       @selected_user_id = user_id
 
@@ -53,7 +57,6 @@ class CondosController < ApplicationController
 
   def update
     authorize @condo
-
     if @condo.update(condo_params)
       redirect_to @condo, notice: 'Condo was successfully updated.'
     else

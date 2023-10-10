@@ -1,0 +1,90 @@
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">マンション情報</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <tr>
+        <th scope="row">マンション名</th>
+        <td><%= @condo.condo_name %></td>
+      </tr>
+      <tr>
+        <th scope="row">住所</th>
+        <td><%= @condo.condo_address %></td>
+      </tr>
+      <tr>
+        <th scope="row">階数</th>
+        <td><%= @condo.floor %></td>
+      </tr>
+      <tr>
+        <th scope="row">地下階数</th>
+        <td><%= @condo.basement_floor %></td>
+      </tr>
+      <tr>
+        <th scope="row">総戸数</th>
+        <td><%= @condo.total_number_of_unit %></td>
+      </tr>
+      <tr>
+        <th scope="row">竣工年</th>
+        <td><%= @condo.completion_year %></td>
+      </tr>
+      <tr>
+        <th scope="row">構造</th>
+        <td><%= Structure.find(@condo.structure_id).name %></td>
+      </tr>
+      <tr>
+        <th scope="row">敷地面積</th>
+        <td><%= @condo.site_area %></td>
+      </tr>
+      <tr>
+        <th scope="row">延べ面積</th>
+        <td><%= @condo.total_floor_area %></td>
+      </tr>
+        <th scope="row">駐車場(台)</th>
+        <td><%= @condo.parking_space %></td>
+      </tr>
+      <tr>
+        <th scope="row">駐輪場(台)</th>
+        <td><%= @condo.bicycle_parking_space %></td>
+      </tr>
+      <tr>
+        <th scope="row">月額管理費㎡単価(円)</th>
+        <td><%= @condo.maintenance_fee %></td>
+      </tr>
+      <tr>
+        <th scope="row">月額修繕積立金㎡単価(円)</th>
+        <td><%= @condo.repair_reserve_fund %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover table-sm">
+    <thead>
+      <tr>
+        <th scope="col">管理会社情報</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <tr>
+        <th scope="row">管理会社名</th>
+        <td><%= @condo.management_company_name %></td>
+      </tr>
+      <tr>
+        <th scope="row">管理会社住所</th>
+        <td><%= @condo.management_company_address %></td>
+      </tr>
+      <tr>
+        <th scope="row">管理会社電話番号</th>
+        <td><%= @condo.management_company_phone_number %></td>
+      </tr>
+      <tr>
+        <th scope="row">管理方式</th>
+        <td><%= ManagementType.find(@condo.management_type_id).name %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

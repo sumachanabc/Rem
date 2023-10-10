@@ -4,6 +4,10 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
-  resources :condos
+  resources :condos do
+    member do
+      get 'details' # マンションの内容を引き継いだページへのルート
+    end
+  end
   root to: 'condos#index'
 end

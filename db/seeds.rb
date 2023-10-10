@@ -67,12 +67,12 @@ management_type_id = ManagementType.find_by(name: '全部委託').id
 structure_id = Structure.find_by(name: 'SRC造').id
 
 # 管理会社情報
-management_company_name = 'TECH渋谷'
+management_company_name = 'TECH管理株式会社'
 management_company_address = '東京都千代田区4-5-6'
 management_company_phone_number = '03-1234-5678'
 
 Condo.create!(
-  condo_name: 'TECH渋谷',
+  condo_name: 'サンコート',
   condo_address: '東京都渋谷区1-2-3',
   floor: 4,
   basement_floor: nil,
