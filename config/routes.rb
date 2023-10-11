@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-    registrations: 'users/registrations',
-    sessions: 'users/sessions'
+    sessions: 'users/sessions',
+    passwords: 'users/passwords',
+    registrations: 'users/registrations'
+  }
+  devise_for :condo_users, controllers: {
+    sessions: 'condo_users/sessions',
+    passwords: 'condo_users/passwords',
+    registrations: 'condo_users/registrations'
   }
 
   resources :condos do
