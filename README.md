@@ -1,24 +1,31 @@
-# README
+# rem
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+このプロジェクトは、マンション、区分所有者、社員のデータ管理を行うシステムです。
 
-Things you may want to cover:
+## 機能
 
-* Ruby version
+- マンション登録データの投稿、一覧表示、詳細表示、編集、削除
+- 区分所有者データの投稿、一覧表示、詳細表示、編集、削除
+- 社員データの投稿、一覧表示、詳細表示、編集、削除
 
-* System dependencies
+## 使い方
 
-* Configuration
+1. 権限のあるユーザーが社員ユーザーを登録します。
+2. 権限のあるユーザーがマンションをデータ登録します。
+3. 権限のあるユーザーがマンションの区分所有者を登録します。
+4. 社員ユーザーでログインしてマンションや区分所有者のデータを表示できます。
 
-* Database creation
+## インストール
 
-* Database initialization
+```
+$ git clone https://github.com/sumachanabc/Rem
+$ bundle install
+$ db:create
+$ db:migrate
+$ rails server
+$ http://localhost:3000
+```
 
-* How to run the test suite
+## 作者
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+SN_sumachan
