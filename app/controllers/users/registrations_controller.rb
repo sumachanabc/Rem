@@ -22,7 +22,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     authorize @user, :create?
 
     if @user.save
-      redirect_to root_path, notice: 'ユーザーが追加されました。'
+      redirect_to root_path, notice: '社員ユーザーが追加されました。'
     else
       render :new
     end

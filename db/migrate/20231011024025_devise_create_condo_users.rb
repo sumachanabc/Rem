@@ -3,6 +3,17 @@
 class DeviseCreateCondoUsers < ActiveRecord::Migration[7.0]
   def change
     create_table :condo_users do |t|
+      ## Your existing columns
+      t.integer :room_number,                 null: false
+      t.string  :condo_user_last_name,        null: false
+      t.string  :condo_user_first_name,       null: false
+      t.string  :condo_user_last_name_kana,   null: false
+      t.string  :condo_user_first_name_kana,  null: false
+      t.string  :condo_user_address,          null: false
+      t.string  :condo_user_phone_number,     null: false
+
+      t.references :condo, null: false, foreign_key: true
+
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""

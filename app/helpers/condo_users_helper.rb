@@ -1,0 +1,2 @@
+module CondoUsersHelper
+end

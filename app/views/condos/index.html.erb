@@ -1,6 +1,7 @@
+<% if user_signed_in? %>
+
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
-
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
           <div class="card shadow-sm">
@@ -9,7 +10,6 @@
             <% end %>
             <div class="card-body">
               <p class="card-text">マンション情報</p>
-
             </div>
           </div>
         </div>
@@ -20,43 +20,67 @@
             <% end %>
             <div class="card-body">
               <p class="card-text">区分所有者情報</p>
-
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card shadow-sm">
             <%= link_to root_path do %>
-              <%= image_tag '自転車のイラスト1.png',alt: '駐輪場・駐車場情報', class: 'bd-placeholder-img card-img-top top-icon' %>
+              <%= image_tag '自転車のイラスト1.png', alt: '駐輪場・駐車場情報', class: 'bd-placeholder-img card-img-top top-icon' %>
             <% end %>
             <div class="card-body">
               <p class="card-text">駐輪場・駐車場情報</p>
-
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card shadow-sm">
             <%= link_to root_path do %>
-              <%= image_tag 'シンプルな書類ファイル.png',alt: '書類', class: 'bd-placeholder-img card-img-top top-icon' %>
+              <%= image_tag 'シンプルな書類ファイル.png', alt: '書類', class: 'bd-placeholder-img card-img-top top-icon' %>
             <% end %>
             <div class="card-body">
               <p class="card-text">書類</p>
-
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card shadow-sm">
             <%= link_to root_path do %>
-              <%= image_tag 'コメントアイコン7.png',alt: '相談履歴', class: 'bd-placeholder-img card-img-top top-icon' %>
+              <%= image_tag 'コメントアイコン7.png', alt: '相談履歴', class: 'bd-placeholder-img card-img-top top-icon' %>
             <% end %>
             <div class="card-body">
               <p class="card-text">相談履歴</p>
-
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+<% else %>
+  <div class="welcome-message">
+    <h1>Remへようこそ。</h1>
+  </div>
+
+  <div class="login-links">
+    <div class="login-link-container">
+      <h2>管理会社の方はこちら</h2>
+      <%= link_to new_user_session_path do %>
+        <div class="login-link">
+          <i class="fas fa-sign-in-alt"></i>
+          <span class="link-text">ログイン</span>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="login-link-container">
+      <h2>マンション組合員の方はこちら</h2>
+      <%= link_to new_condo_user_session_path do %>
+        <div class="login-link">
+          <i class="fas fa-sign-in-alt"></i>
+          <span class="link-text">ログイン</span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
