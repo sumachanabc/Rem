@@ -28,7 +28,7 @@ $ http://localhost:3000
 
 ## 本番環境
 
-[URL](https://rem-6zkh.onrender.com/"Rem")
+[Rem](https://rem-6zkh.onrender.com/)
 ID：admin
 PASS：2222
 
