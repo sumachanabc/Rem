@@ -17,23 +17,23 @@ class ApplicationPolicy
   end
 
   def create?
-    user.admin? || user.manage?
+    true
   end
 
   def new?
-    user.admin? || user.manage?
+    true
   end
 
   def update?
-    user.admin? || user.manage?
+    true
   end
 
   def edit?
-    user.admin? || user.manage?
+    true
   end
 
   def destroy?
-    user.admin? || user.manage?
+    true
   end
 
   class Scope

@@ -1,0 +1,28 @@
+<div class="table-responsive-sm">
+  <table class="table table-sm table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">外部</th>
+        <th scope="col">部屋番号</th>
+        <th scope="col">氏名（姓）</th>
+        <th scope="col">氏名（名）</th>
+        <th scope="col">電話番号</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @condo_users.each_with_index do |condo_user, index| %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= condo_user.condo_user_address != @condo.condo_address ? '●' : '' %></td>
+          <td><%= condo_user.room_number %></td>
+          <td><%= condo_user.condo_user_last_name %></td>
+          <td><%= condo_user.condo_user_first_name %></td>
+          <td><%= condo_user.condo_user_phone_number %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+

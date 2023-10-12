@@ -6,7 +6,7 @@ User.create!(
   last_name: '管理者',
   first_name_kana: 'イチロウ',
   last_name_kana: 'カンリシャ',
-  email: 'fff@gmail.com',
+  email: 'fff@example.com',
   password: 'fff444',
   password_confirmation: 'fff444',
   role: 1
@@ -18,7 +18,7 @@ User.create!(
   last_name: '役職',
   first_name_kana: 'ジロウ',
   last_name_kana: 'ヤクショク',
-  email: 'jjj@gmail.com',
+  email: 'jjj@example.com',
   password: '444fff',
   password_confirmation: '444fff',
   role: 2
@@ -30,7 +30,7 @@ User.create!(
   last_name: '社員',
   first_name_kana: 'サブロウ',
   last_name_kana: 'シャイン',
-  email: 'qqq@gmail.com',
+  email: 'qqq@example.com',
   password: '111qqq',
   password_confirmation: '111qqq',
   role: 0
@@ -41,7 +41,7 @@ User.create!(
   last_name: '社員',
   first_name_kana: 'シロウ',
   last_name_kana: 'シャイン',
-  email: 'www@gmail.com',
+  email: 'www@example.com',
   password: '222www',
   password_confirmation: '222www',
   role: 0
@@ -52,7 +52,7 @@ User.create!(
   last_name: '社員',
   first_name_kana: 'ゴロウ',
   last_name_kana: 'シャイン',
-  email: 'eee@gmail.com',
+  email: 'eee@example.com',
   password: '333eee',
   password_confirmation: '333eee',
   role: 0
@@ -70,7 +70,7 @@ structure_id = Structure.find_by(name: 'SRC造').id
 management_company_name = 'TECH管理株式会社'
 management_company_postal_code = '101-1010'
 management_company_address = '東京都千代田区4-5-6'
-management_company_phone_number = '03-1234-5678'
+management_company_phone_number = '0312345678'
 
 Condo.create!(
   condo_name: 'サンコート',
@@ -98,7 +98,7 @@ Condo.create!(
 Condo.create!(
   condo_name: 'モダンパーク',
   postal_code: '111-2222',
-  condo_address: '東京都渋谷区1-2-3',
+  condo_address: '東京都北区1-2-3',
   floor: 4,
   basement_floor: nil,
   total_number_of_unit: 10,
@@ -189,3 +189,156 @@ Condo.create!(
 
 # ---------------
 
+# ---区分所有者---
+
+require 'gimei'
+
+common_password = '1a1a1a'
+room_numbers = [101, 102, 103, 201, 202, 203, 301, 302, 303, 401, 402, 403]
+phone_numbers = Array.new(12) { "080#{rand(10000000..99999999)}" }
+
+12.times do |index|
+  gimei = Gimei.new
+
+  email = "a#{format('%02d', index + 1)}@condo.com"
+
+  address = if index < 2
+              Gimei.address.kanji
+            else
+              '東京都渋谷区1-2-3'
+            end
+
+  CondoUser.create!(
+    email: email,
+    password: common_password,
+    password_confirmation: common_password,
+    room_number: room_numbers[index],
+    condo_user_last_name: gimei.last.kanji,
+    condo_user_first_name: gimei.first.kanji,
+    condo_user_last_name_kana: gimei.last.katakana,
+    condo_user_first_name_kana: gimei.first.katakana,
+    condo_user_address: address,
+    condo_user_phone_number: phone_numbers[index],
+    condo_id: 1
+  )
+end
+
+require 'gimei'
+
+common_password = '1a1a1a'
+room_numbers = [101, 102, 103, 201, 202, 203, 301, 302, 303, 401]
+phone_numbers = Array.new(10) { "080#{rand(10000000..99999999)}" }
+
+10.times do |index|
+  gimei = Gimei.new
+  email = "b#{format('%02d', index + 1)}@example.com"
+  address = if [0, 1].include?(index)
+              Gimei.address.kanji
+            else
+              '東京都北区1-2-3'
+            end
+
+  CondoUser.create!(
+    email: email,
+    password: common_password,
+    password_confirmation: common_password,
+    room_number: room_numbers[index],
+    condo_user_last_name: gimei.last.kanji,
+    condo_user_first_name: gimei.first.kanji,
+    condo_user_last_name_kana: gimei.last.katakana,
+    condo_user_first_name_kana: gimei.first.katakana,
+    condo_user_address: address,
+    condo_user_phone_number: phone_numbers[index],
+    condo_id: 2
+  )
+end
+
+require 'gimei'
+
+common_password = '1a1a1a'
+room_numbers = [101, 102, 201, 202, 301, 302, 401, 402, 501]
+phone_numbers = Array.new(9) { "080#{rand(10000000..99999999)}" }
+
+9.times do |index|
+  gimei = Gimei.new
+  email = "c#{format('%02d', index + 1)}@example.com"
+  address = if [0, 1].include?(index)
+              Gimei.address.kanji
+            else
+              '東京都新宿区4-5-6'
+            end
+
+  CondoUser.create!(
+    email: email,
+    password: common_password,
+    password_confirmation: common_password,
+    room_number: room_numbers[index],
+    condo_user_last_name: gimei.last.kanji,
+    condo_user_first_name: gimei.first.kanji,
+    condo_user_last_name_kana: gimei.last.katakana,
+    condo_user_first_name_kana: gimei.first.katakana,
+    condo_user_address: address,
+    condo_user_phone_number: phone_numbers[index],
+    condo_id: 3
+  )
+end
+
+require 'gimei'
+
+common_password = '1a1a1a'
+room_numbers = [101, 102, 201, 202, 301, 302, 401, 402, 501, 502, 601]
+phone_numbers = Array.new(11) { "080#{rand(10000000..99999999)}" }
+
+11.times do |index|
+  gimei = Gimei.new
+  email = "d#{format('%02d', index + 1)}@example.com"
+  address = if [0, 1].include?(index)
+              Gimei.address.kanji
+            else
+              '東京都港区7-8-9'
+            end
+
+  CondoUser.create!(
+    email: email,
+    password: common_password,
+    password_confirmation: common_password,
+    room_number: room_numbers[index],
+    condo_user_last_name: gimei.last.kanji,
+    condo_user_first_name: gimei.first.kanji,
+    condo_user_last_name_kana: gimei.last.katakana,
+    condo_user_first_name_kana: gimei.first.katakana,
+    condo_user_address: address,
+    condo_user_phone_number: phone_numbers[index],
+    condo_id: 4
+  )
+end
+
+require 'gimei'
+
+common_password = '1a1a1a'
+room_numbers = [101, 102, 103, 104, 201, 202, 203, 301, 302, 303]
+phone_numbers = Array.new(10) { "080#{rand(10000000..99999999)}" }
+
+10.times do |index|
+  gimei = Gimei.new
+  email = "e#{format('%02d', index + 1)}@example.com"
+  address = if [0, 1].include?(index)
+              Gimei.address.kanji
+            else
+              '東京都中央区10-11-12'
+            end
+
+  CondoUser.create!(
+    email: email,
+    password: common_password,
+    password_confirmation: common_password,
+    room_number: room_numbers[index],
+    condo_user_last_name: gimei.last.kanji,
+    condo_user_first_name: gimei.first.kanji,
+    condo_user_last_name_kana: gimei.last.katakana,
+    condo_user_first_name_kana: gimei.first.katakana,
+    condo_user_address: address,
+    condo_user_phone_number: phone_numbers[index],
+    condo_id: 5
+  )
+end

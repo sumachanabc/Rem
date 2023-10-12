@@ -4,6 +4,7 @@ class Condo < ApplicationRecord
   belongs_to :structure, class_name: 'Structure', foreign_key: 'structure_id'
   belongs_to :management_type, class_name: 'ManagementType', foreign_key: 'management_type_id'
   belongs_to :user
+  has_many :condo_users
 
   # バリデーション
   with_options presence: true do
@@ -12,7 +13,7 @@ class Condo < ApplicationRecord
     validates :condo_address
     validates :floor, numericality: { only_integer: true, less_than_or_equal_to: 999 }
     validates :total_number_of_unit, numericality: { only_integer: true, less_than_or_equal_to: 9999 }
-    validates :completion_year, numericality: { only_integer: true, less_than_or_equal_to: 999 }
+    validates :completion_year
     validates :structure_id, numericality: { other_than: 1 }
     validates :site_area
     validates :total_floor_area
