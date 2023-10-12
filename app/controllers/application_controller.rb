@@ -6,6 +6,16 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
   # Punditを適用するcontrollerの継承元でincludeする。
 
+  def after_sign_in_path_for(resource)
+    case resource
+    when User
+      root_path
+    when CondoUser
+      # ネストされたリソースのため、condo_id を指定する
+      condo_condo_user_posts_path(condo_id: current_condo_user.condo.id)
+    end
+  end
+
   private
 
   def basic_auth

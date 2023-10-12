@@ -14,9 +14,10 @@ Rails.application.routes.draw do
     member do
       get 'details'
     end
-    resources :condo_users, only: [:index]
+    resources :condo_users, only: [:index, :new, :create]
+    resources :condo_user_posts, only: [:index]
   end
-  
+
   root to: 'condos#index'
 
 end
