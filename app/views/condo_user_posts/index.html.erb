@@ -1,0 +1,26 @@
+  <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <%= link_to details_condo_path(@condo) do %>
+              <%= image_tag 'ビルアイコン6.png', alt: 'マンション情報', class: 'bd-placeholder-img card-img-top top-icon' %>
+            <% end %>
+            <div class="card-body">
+              <p class="card-text">マンション情報</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <%= link_to condo_condo_user_posts_path(condo_id: current_condo_user.condo.id) do %>
+              <%= image_tag 'コメントアイコン7.png', alt: '相談履歴', class: 'bd-placeholder-img card-img-top top-icon' %>
+            <% end %>
+            <div class="card-body">
+              <p class="card-text">相談チャット</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

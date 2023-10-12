@@ -6,6 +6,16 @@ ja:
         first_name: 名
         last_name_kana: 姓（カナ）
         first_name_kana: 名（カナ）
+      condo_user:
+        email: メールアドレス
+        password: パスワード
+        room_number: 部屋番号
+        condo_user_last_name: 姓
+        condo_user_first_name: 名
+        condo_user_last_name_kana: 姓（カナ）
+        condo_user_first_name_kana: 名（カナ）
+        condo_user_address: 住所
+        condo_user_phone_number: 電話番号
       condo:
         text: テキスト
         image: 画像

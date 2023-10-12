@@ -19,12 +19,22 @@
           </a>
 
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <%= link_to "Home", root_path, class: "nav-link px-2 text-secondary" %></li>
+            <% if user_signed_in? %>
+              <li><%= link_to "Home", root_path, class: "nav-link px-2 text-secondary" %></li>
+            <% else %>
+              <li><%= link_to "Home", "#", style: "display:none;" %></li>
+            <% end %>
+
+            <% if condo_user_signed_in? %>
+              <li><%= link_to "Home", condo_condo_user_posts_path(condo_id: current_condo_user.condo.id), class: "nav-link px-2 text-secondary" %></li>
+            <% else %>
+              <li><%= link_to "Home", "#", style: "display:none;" %></li>
+            <% end %>
           </ul>
 
-          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+          <%# <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
             <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
-          </form>
+          </form> %>
 
           <div class="text-end">
             <% if user_signed_in? %>
@@ -35,6 +45,7 @@
 
               <% if current_user.admin? %>
                 <%# 管理者の場合 %>
+                <%= link_to "区分所有者登録", new_condo_user_registration_path, data: { turbo: false }, class: "btn btn-warning", role: "button" %>
                 <%= link_to "社員登録", new_user_registration_path, data: { turbo: false }, class: "btn btn-warning", role: "button" %>
                 <%= link_to "マンション登録", new_condo_path, data: { turbo: false }, class: "btn btn-warning", role: "button" %>
                 <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-light me-2", role: "button"  %>
@@ -43,10 +54,6 @@
                 <%# マネージャーの場合 %>
                 <%= link_to "マンション登録", new_condo_path, data: { turbo: false }, class: "btn btn-warning", role: "button" %>
                 <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-light me-2", role: "button"  %>
-
-              <%# <% elsif condo_user_signed_in? %>
-                <%# コンドユーザーの場合 %>
-                <%# <%= link_to 'ログアウト', destroy_condo_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-light me-2", role: "button"  %>
 
               <% else %>
                 <%# 社員の場合 %>
@@ -64,7 +71,11 @@
               <% end %>
 
             <% else %>
-              <%# ユーザーがログインしていない場合 %>
+              <%# 社員ユーザーがログインしていない場合 %>
+            <% end %>
+            <% if condo_user_signed_in? %>
+              <%= link_to 'ログアウト', destroy_condo_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-light me-2", role: "button"  %>
+            <% else %>
             <% end %>
           </div>
 
