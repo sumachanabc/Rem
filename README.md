@@ -26,6 +26,12 @@ $ rails server
 $ http://localhost:3000
 ```
 
+## 本番環境
+
+[URL](https://rem-6zkh.onrender.com/"Rem")
+ID：admin
+PASS：2222
+
 ## 作者
 
 SN_sumachan
