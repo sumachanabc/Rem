@@ -14,6 +14,9 @@ module Rem
     # 日本語の言語設定。この一行を追加。
     config.i18n.default_locale = :ja
     
+    #例外を403HTTPステータスにする。これを付けないと500になる｡
+    # :forbiddenというシンボルはステータスコード403と定義されている｡
+    config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -23,3 +26,5 @@ module Rem
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
+
+

@@ -223,35 +223,35 @@ phone_numbers = Array.new(12) { "080#{rand(10000000..99999999)}" }
   )
 end
 
-# require 'gimei'
+require 'gimei'
 
-# common_password = '1a1a1a'
-# room_numbers = [101, 102, 103, 201, 202, 203, 301, 302, 303, 401]
-# phone_numbers = Array.new(10) { "080#{rand(10000000..99999999)}" }
+common_password = '1a1a1a'
+room_numbers = [101, 102, 103, 201, 202, 203, 301, 302, 303, 401]
+phone_numbers = Array.new(10) { "080#{rand(10000000..99999999)}" }
 
-# 10.times do |index|
-#   gimei = Gimei.new
-#   email = "b#{format('%02d', index + 1)}@example.com"
-#   address = if [0, 1].include?(index)
-#               Gimei.address.kanji
-#             else
-#               '東京都北区1-2-3'
-#             end
+10.times do |index|
+  gimei = Gimei.new
+  email = "b#{format('%02d', index + 1)}@example.com"
+  address = if [0, 1].include?(index)
+              Gimei.address.kanji
+            else
+              '東京都北区1-2-3'
+            end
 
-#   CondoUser.create!(
-#     email: email,
-#     password: common_password,
-#     password_confirmation: common_password,
-#     room_number: room_numbers[index],
-#     condo_user_last_name: gimei.last.kanji,
-#     condo_user_first_name: gimei.first.kanji,
-#     condo_user_last_name_kana: gimei.last.katakana,
-#     condo_user_first_name_kana: gimei.first.katakana,
-#     condo_user_address: address,
-#     condo_user_phone_number: phone_numbers[index],
-#     condo_id: 2
-#   )
-# end
+  CondoUser.create!(
+    email: email,
+    password: common_password,
+    password_confirmation: common_password,
+    room_number: room_numbers[index],
+    condo_user_last_name: gimei.last.kanji,
+    condo_user_first_name: gimei.first.kanji,
+    condo_user_last_name_kana: gimei.last.katakana,
+    condo_user_first_name_kana: gimei.first.katakana,
+    condo_user_address: address,
+    condo_user_phone_number: phone_numbers[index],
+    condo_id: 2
+  )
+end
 
 require 'gimei'
 
