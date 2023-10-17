@@ -111,7 +111,7 @@ PASS：2222
 
 ## データベース設計
 
-[![Image from Gyazo](https://i.gyazo.com/06801f902a8ca031230cfd4acb1f87b4.png)](https://gyazo.com/06801f902a8ca031230cfd4acb1f87b4)
+[![Image from Gyazo](https://i.gyazo.com/9078763fd49f98da9dd3a4f68faf5a28.png)](https://gyazo.com/9078763fd49f98da9dd3a4f68faf5a28)
 
 ### Users テーブル
 
