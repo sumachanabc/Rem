@@ -6,9 +6,10 @@ ja:
         first_name: 名
         last_name_kana: 姓（カナ）
         first_name_kana: 名（カナ）
+        password_confirmation: パスワード（確認用）
+        role: 役割
       condo_user:
-        email: メールアドレス
-        password: パスワード
+        password_confirmation: パスワード（確認用）
         room_number: 部屋番号
         condo_user_last_name: 姓
         condo_user_first_name: 名
@@ -16,6 +17,12 @@ ja:
         condo_user_first_name_kana: 名（カナ）
         condo_user_address: 住所
         condo_user_phone_number: 電話番号
+        reset_password_sent_at: パスワードリセット送信時刻
+        reset_password_token: パスワードリセット用トークン
+        remember_created_at: ログイン記憶時刻
+        created_at: 作成日
+        updated_at: 更新日
+        condo: マンション
       condo:
         text: テキスト
         image: 画像
@@ -26,6 +33,7 @@ ja:
         basement_floor: 地下階数
         total_number_of_unit: 総戸数
         completion_year: 竣工年
+        structure: 構造
         structure_id: 構造
         site_area: 敷地面積
         total_floor_area: 延べ面積
@@ -37,7 +45,11 @@ ja:
         management_company_postal_code: 管理会社郵便番号
         management_company_address: 管理会社住所
         management_company_phone_number: 管理会社電話番号
+        management_type: 管理方式
         management_type_id: 管理方式
+        user: 社員
+        created_at: 作成日
+        updated_at: 更新日
 
   # activemodel:   # Formオブジェクトを用いた場合
   #    attributes:
