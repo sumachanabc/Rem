@@ -20,4 +20,7 @@ Rails.application.routes.draw do
 
   root to: 'condos#index'
 
+  # Active Admin routes
+  ActiveAdmin.routes(self)
+
 end
