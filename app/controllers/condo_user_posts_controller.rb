@@ -6,7 +6,8 @@ class CondoUserPostsController < ApplicationController
   end
 
   def new
-    @condo_user_post = CondoUserPost.new
+  @condo = Condo.find(params[:condo_id])
+  @condo_user_post = @condo.condo_user_posts.build
   end
 
   def create

@@ -26,11 +26,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_31_140911) do
   end
 
   create_table "condo_user_posts", charset: "utf8", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
+    t.string "title", null: false
+    t.text "content", null: false
     t.bigint "condo_user_id", null: false
+    t.bigint "condo_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["condo_id"], name: "index_condo_user_posts_on_condo_id"
     t.index ["condo_user_id"], name: "index_condo_user_posts_on_condo_user_id"
   end
 
@@ -99,6 +101,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_31_140911) do
   end
 
   add_foreign_key "condo_user_posts", "condo_users"
+  add_foreign_key "condo_user_posts", "condos"
   add_foreign_key "condo_users", "condos"
   add_foreign_key "condos", "users"
 end
