@@ -86,3 +86,10 @@ i.fas {
   font-size: 12px;
   font-weight: bold;
 }
+
+/* お問合せフォーム */
+
+.t-area-custom {
+max-height: 200px;  /* 最大高さを200pxに設定 */
+overflow-y: auto;  /* 縦方向にスクロールを許可 */
+}
