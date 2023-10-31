@@ -20,6 +20,8 @@ class CondoUserPostsController < ApplicationController
 
 private
 
-def condo_user_post_params
-  params.require(:condo_user_post).permit(:title, :content).merge(condo_user_id: current_condo_user.id)
+  def condo_user_post_params
+    params.require(:condo_user_post).permit(:title, :content).merge(condo_user_id: current_condo_user.id)
+  end
+
 end

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       get 'details'
     end
     resources :condo_users, only: [:index, :new, :create]
-    resources :condo_user_posts, only: [:index]
+    resources :condo_user_posts, only: [:index, :new, :create]
   end
 
   root to: 'condos#index'
