@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_22_054539) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_31_140911) do
   create_table "active_admin_comments", charset: "utf8", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -23,6 +23,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_22_054539) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
+  end
+
+  create_table "condo_user_posts", charset: "utf8", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.bigint "condo_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["condo_user_id"], name: "index_condo_user_posts_on_condo_user_id"
   end
 
   create_table "condo_users", charset: "utf8", force: :cascade do |t|
@@ -89,6 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_22_054539) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "condo_user_posts", "condo_users"
   add_foreign_key "condo_users", "condos"
   add_foreign_key "condos", "users"
 end
