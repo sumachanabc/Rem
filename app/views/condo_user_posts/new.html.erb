@@ -1,10 +1,25 @@
-<%= form_with model: [@condo, @condo_user_post], local: true do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+<%= form_with model: [@condo, @condo_user_post], data: { turbo: false }, local: true do |f| %>
+  <%= render 'shared/error_messages', model: f.object %>
 
-  <%= f.label :content %>
-  <%= f.text_area :content %>
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :title, 'タイトル', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :title, class:"input-default" %>
+  </div>
 
-  <%= f.submit '送信' %>
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :content, '内容', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_area :content, class: "input-default" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit '投稿', data: { turbo: false } %>
+    <%= link_to '戻る', condo_condo_user_posts_path(@condo), class: "back-btn" %>
+  </div>
+
 <% end %>
-
