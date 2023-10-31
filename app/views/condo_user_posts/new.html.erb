@@ -1,2 +1,10 @@
-<h1>CondoUserPosts#new</h1>
-<p>Find me in app/views/condo_user_posts/new.html.erb</p>
+<%= form_with model: @condo_user_post, local: true do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+
+  <%= f.submit '送信' %>
+<% end %>
+
