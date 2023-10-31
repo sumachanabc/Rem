@@ -10,13 +10,16 @@ class CondoUserPostsController < ApplicationController
   end
 
   def create
-    CondoUserPost.create(condo_user_post_params)
-    redirect_to root_path
+    @condo_user_post = CondoUserPost.new(condo_user_post_params)
+    if @condo_user_post.save
+      redirect_to some_path, notice: 'お問い合わせが送信されました'
+    else
+      render :new
+    end
   end
-end
 
 private
 
 def condo_user_post_params
-  params.require(:condo_user_post).permit(:image, :text).merge(condo_user_id: current_condo_user.id)
+  params.require(:condo_user_post).permit(:title, :content).merge(condo_user_id: current_condo_user.id)
 end
