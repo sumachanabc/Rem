@@ -12,6 +12,10 @@ class CondoPolicy < ApplicationPolicy
     true
   end
 
+  def inquiries?
+
+  end
+
   def create?
     user.admin? || user.manage?
   end

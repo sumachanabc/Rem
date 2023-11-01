@@ -17,6 +17,7 @@ class CondosController < ApplicationController
 
   def inquiries
     @condo = Condo.find(params[:id])
+    authorize @condo
     @condo_user_posts = @condo.condo_user_posts.order(created_at: :desc)
   end
 
