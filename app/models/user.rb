@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :condos
+  has_many :condo_user_post_replies
 
   # roleを設定
   enum role: { employee: 0, admin: 1, manage: 2 }
