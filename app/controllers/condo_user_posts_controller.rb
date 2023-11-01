@@ -20,6 +20,10 @@ class CondoUserPostsController < ApplicationController
     end
   end
 
+  def show
+    @condo_user_post = CondoUserPost.find(params[:id])
+  end
+
 private
 
   def condo_user_post_params
