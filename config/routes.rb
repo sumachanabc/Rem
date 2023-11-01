@@ -16,12 +16,13 @@ Rails.application.routes.draw do
       get 'inquiries'
     end
     resources :condo_users, only: [:index, :new, :create]
-    resources :condo_user_posts, only: [:index, :new, :create, :show]
+    resources :condo_user_posts, only: [:index, :new, :create, :show] do
+      resources :condo_user_post_replies, only: [:create, :update]
+    end
   end
 
   root to: 'condos#index'
 
   # Active Admin routes
   ActiveAdmin.routes(self)
-
 end
