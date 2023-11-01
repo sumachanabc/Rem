@@ -1,5 +1,11 @@
 <h1><%= @condo_user_post.title %></h1>
-<p><%= @condo_user_post.content %></p>
+
 <p>投稿日: <%= @condo_user_post.created_at %></p>
-<p>氏名: <%= @condo_user_post.condo_user.condo_user_last_name %> <%= @condo_user_post.condo_user.condo_user_first_name %></p>
-<p>部屋番号: <%= @condo_user_post.condo_user.room_number %></p>
+
+<div>
+  <span>部屋番号: <%= @condo_user_post.condo_user.room_number %></span>
+  <span>氏名: <%= @condo_user_post.condo_user.condo_user_last_name %> <%= @condo_user_post.condo_user.condo_user_first_name %></span>
+</div>
+
+<p>内容: <%= @condo_user_post.content %></p>
+
