@@ -3,9 +3,13 @@
 <ul>
   <% @condo_user_posts.each do |post| %>
     <li>
-      <strong><%= post.title %></strong><br>
+      <strong>
+        <%= link_to post.title, condo_user_post_path(@condo, post) %>
+      </strong><br>
       <%= post.content %><br>
-      <%= post.created_at %>
+      <%= post.created_at %><br>
+      氏名: <%= post.condo_user.condo_user_last_name %> <%= post.condo_user.condo_user_first_name %><br>
+      部屋番号: <%= post.condo_user.room_number %>
     </li>
   <% end %>
 </ul>
