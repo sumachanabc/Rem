@@ -1,0 +1,11 @@
+<h1><%= @condo.condo_name %> の相談履歴</h1>
+
+<ul>
+  <% @condo_user_posts.each do |post| %>
+    <li>
+      <strong><%= post.title %></strong><br>
+      <%= post.content %><br>
+      <%= post.created_at %>
+    </li>
+  <% end %>
+</ul>
