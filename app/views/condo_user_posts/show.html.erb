@@ -9,6 +9,10 @@
 
 <p>内容: <%= @condo_user_post.content %></p>
 
+<% if @condo_user_post.image.attached? %>
+  <%= image_tag @condo_user_post.image %>
+<% end %>
+
 <% @condo_user_post.condo_user_post_replies.each do |reply| %>
   <% if reply.user %>
     <%# 管理会社のユーザーであれば誰でもコメントを表示 %>
@@ -25,7 +29,8 @@
 
 <%= form_with(
       model: CondoUserPostReply.new, 
-      url: condo_condo_user_post_condo_user_post_replies_path(@condo_user_post.condo_id, @condo_user_post), 
+      url: condo_condo_user_post_condo_user_post_replies_path(@condo_user_post.condo_id, @condo_user_post),
+      data: { turbo: false },
       local: true
     ) do |form| %>
   <%= form.label :content, "新しいコメント" %>
