@@ -1,51 +1,86 @@
-<h1><%= @condo_user_post.title %></h1>
+<div class="container mt-4">
+  <div class="card mb-4">
+    <div class="card-body">
+      <h1 class="card-title"><%= @condo_user_post.title %></h1>
+      <h6 class="card-subtitle mb-2 text-muted">投稿日: <%= l(@condo_user_post.created_at, format: :long) %></h6>
+      <div class="mb-3">
+        <span class="badge bg-secondary">部屋番号: <%= @condo_user_post.condo_user.room_number %></span>
+        <span class="badge bg-secondary">氏名: <%= @condo_user_post.condo_user.condo_user_last_name %> <%= @condo_user_post.condo_user.condo_user_first_name %></span>
+      </div>
+      <p class="card-text">内容: <%= @condo_user_post.content %></p>
+      <% if @condo_user_post.image.attached? %>
+        <%= link_to image_tag(@condo_user_post.image.variant(resize: '300x300'), class: "img-thumbnail"), @condo_user_post.image, data: { toggle: "modal", target: "#imageModalPost" } %>
 
-<p>投稿日: <%= @condo_user_post.created_at %></p>
-
-<div>
-  <span>部屋番号: <%= @condo_user_post.condo_user.room_number %></span>
-  <span>氏名: <%= @condo_user_post.condo_user.condo_user_last_name %> <%= @condo_user_post.condo_user.condo_user_first_name %></span>
-</div>
-
-<p>内容: <%= @condo_user_post.content %></p>
-
-<% if @condo_user_post.image.attached? %>
-  <%= image_tag @condo_user_post.image %>
-<% end %>
-
-<% @condo_user_post.condo_user_post_replies.each do |reply| %>
-  <% if reply.user %>
-    <div>
-      管理会社: <%= reply.user.last_name %> <%= reply.user.first_name %>
-      <p>コメント: <%= reply.content %></p>
-      <p>投稿日時: <%= l(reply.created_at, format: :long) %></p>
+        <div class="modal fade" id="imageModalPost" tabindex="-1" aria-labelledby="imageModalLabelPost" aria-hidden="true">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabelPost">画像</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <%= image_tag(@condo_user_post.image, class: "img-fluid") %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% elsif reply.condo_user %>
-    <div>
-      部屋番号: <%= reply.condo_user.room_number %>
-      氏名: <%= reply.condo_user.condo_user_last_name %> <%= reply.condo_user.condo_user_first_name %>
-      <p>コメント: <%= reply.content %></p>
-      <p>投稿日時: <%= l(reply.created_at, format: :long) %></p>
+  </div>
+
+  <% @condo_user_post.condo_user_post_replies.each_with_index do |reply, index| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <% if reply.user %>
+          <h5 class="card-title">管理会社: <%= reply.user.last_name %> <%= reply.user.first_name %></h5>
+        <% elsif reply.condo_user %>
+          <h5 class="card-title">部屋番号: <%= reply.condo_user.room_number %> 氏名: <%= reply.condo_user.condo_user_last_name %> <%= reply.condo_user.condo_user_first_name %></h5>
+        <% end %>
+        <p class="card-text">コメント: <%= reply.content %></p>
+        <p class="card-text"><small class="text-muted">投稿日時: <%= l(reply.created_at, format: :long) %></small></p>
+        <% if reply.image.attached? %>
+          <%= link_to image_tag(reply.image.variant(resize: '300x300'), class: "img-thumbnail"), reply.image, data: { toggle: "modal", target: "#imageModal#{index}" } %>
+
+          <div class="modal fade" id="imageModal<%= index %>" tabindex="-1" aria-labelledby="imageModalLabel<%= index %>" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="imageModalLabel<%= index %>">画像</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <%= image_tag(reply.image, class: "img-fluid") %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   <% end %>
-<% end %>
 
+  <%= form_with(
+        model: CondoUserPostReply.new, 
+        url: condo_condo_user_post_condo_user_post_replies_path(@condo_user_post.condo_id, @condo_user_post),
+        data: { turbo: false },
+        local: true,
+        html: { class: "needs-validation", novalidate: true }
+      ) do |form| %>
+    <div class="mb-3">
+      <%= form.label :content, "新しいコメント", class: "form-label" %>
+      <%= form.text_area :content, class: "form-control", required: true %>
+      <div class="invalid-feedback">
+        コメントを入力してください。
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :image, "画像を添付", class: "form-label" %>
+      <%= form.file_field :image, class: "form-control" %>
+    </div>
+    <%= form.submit "コメントする", class: "btn btn-primary" %>
+  <% end %>
+</div>
 
-
-
-
-<%= form_with(
-      model: CondoUserPostReply.new, 
-      url: condo_condo_user_post_condo_user_post_replies_path(@condo_user_post.condo_id, @condo_user_post),
-      data: { turbo: false },
-      local: true
-    ) do |form| %>
-  <%= form.label :content, "新しいコメント" %>
-  <%= form.text_area :content %>
-  <%= form.label :image, "画像を添付" %>
-  <%= form.file_field :image %>
-  <%= form.submit "コメントする" %>
-<% end %>
 
 
 
