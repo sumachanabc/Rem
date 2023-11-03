@@ -1,7 +1,7 @@
 # ---管理会社---
 
 # admin
-User.create!(
+admin_user = User.create!(
   first_name: '一郎',
   last_name: '管理者',
   first_name_kana: 'イチロウ',
@@ -13,7 +13,7 @@ User.create!(
 )
 
 # manage
-User.create!(
+manage_user = User.create!(
   first_name: '二郎',
   last_name: '役職',
   first_name_kana: 'ジロウ',
@@ -25,7 +25,8 @@ User.create!(
 )
 
 # employee
-User.create!(
+employee_users = []
+employee_users << User.create!(
   first_name: '三郎',
   last_name: '社員',
   first_name_kana: 'サブロウ',
@@ -36,7 +37,7 @@ User.create!(
   role: 0
 )
 
-User.create!(
+employee_users << User.create!(
   first_name: '四郎',
   last_name: '社員',
   first_name_kana: 'シロウ',
@@ -47,7 +48,7 @@ User.create!(
   role: 0
 )
 
-User.create!(
+employee_users << User.create!(
   first_name: '五郎',
   last_name: '社員',
   first_name_kana: 'ゴロウ',
@@ -72,7 +73,8 @@ management_company_postal_code = '101-1010'
 management_company_address = '東京都千代田区4-5-6'
 management_company_phone_number = '0312345678'
 
-Condo.create!(
+condos = []
+condos << Condo.create!(
   condo_name: 'サンコート',
   postal_code: '111-1111',
   condo_address: '東京都渋谷区1-2-3',
@@ -92,10 +94,10 @@ Condo.create!(
   bicycle_parking_space: 20,
   maintenance_fee: 200.0,
   repair_reserve_fund: 150.0,
-  user_id: 3
+  user_id: employee_users[0].id
 )
 
-Condo.create!(
+condos << Condo.create!(
   condo_name: 'モダンパーク',
   postal_code: '111-2222',
   condo_address: '東京都北区1-2-3',
@@ -115,10 +117,10 @@ Condo.create!(
   bicycle_parking_space: 15,
   maintenance_fee: 180.0,
   repair_reserve_fund: 120.0,
-  user_id: 3
+  user_id: employee_users[0].id
 )
 
-Condo.create!(
+condos << Condo.create!(
   condo_name: 'サンライズヒルズ',
   postal_code: '111-3333',
   condo_address: '東京都新宿区4-5-6',
@@ -138,10 +140,10 @@ Condo.create!(
   bicycle_parking_space: 10,
   maintenance_fee: 190.0,
   repair_reserve_fund: 130.0,
-  user_id: 3
+  user_id: employee_users[0].id
 )
 
-Condo.create!(
+condos << Condo.create!(
   condo_name: 'グリーンコート',
   postal_code: '111-4444',
   condo_address: '東京都港区7-8-9',
@@ -161,10 +163,10 @@ Condo.create!(
   bicycle_parking_space: 12,
   maintenance_fee: 200.0,
   repair_reserve_fund: 140.0,
-  user_id: 4
+  user_id: employee_users[1].id
 )
 
-Condo.create!(
+condos << Condo.create!(
   condo_name: 'アーバンパレス',
   postal_code: '111-5555',
   condo_address: '東京都中央区10-11-12',
@@ -184,7 +186,7 @@ Condo.create!(
   bicycle_parking_space: 14,
   maintenance_fee: 180.0,
   repair_reserve_fund: 120.0,
-  user_id: 4
+  user_id: employee_users[1].id
 )
 
 # ---------------
@@ -219,7 +221,8 @@ phone_numbers = Array.new(12) { "080#{rand(10000000..99999999)}" }
     condo_user_first_name_kana: gimei.first.katakana,
     condo_user_address: address,
     condo_user_phone_number: phone_numbers[index],
-    condo_id: 1
+    condo_id: condos[0].id,
+    user_id: employee_users[0].id
   )
 end
 
@@ -249,7 +252,8 @@ phone_numbers = Array.new(10) { "080#{rand(10000000..99999999)}" }
     condo_user_first_name_kana: gimei.first.katakana,
     condo_user_address: address,
     condo_user_phone_number: phone_numbers[index],
-    condo_id: 2
+    condo_id: condos[1].id,
+    user_id: employee_users[0].id
   )
 end
 
@@ -279,7 +283,8 @@ phone_numbers = Array.new(9) { "080#{rand(10000000..99999999)}" }
     condo_user_first_name_kana: gimei.first.katakana,
     condo_user_address: address,
     condo_user_phone_number: phone_numbers[index],
-    condo_id: 3
+    condo_id: condos[2].id,
+    user_id: employee_users[0].id
   )
 end
 
@@ -309,7 +314,8 @@ phone_numbers = Array.new(11) { "080#{rand(10000000..99999999)}" }
     condo_user_first_name_kana: gimei.first.katakana,
     condo_user_address: address,
     condo_user_phone_number: phone_numbers[index],
-    condo_id: 4
+    condo_id: condos[3].id,
+    user_id: employee_users[1].id
   )
 end
 
@@ -339,6 +345,7 @@ phone_numbers = Array.new(10) { "080#{rand(10000000..99999999)}" }
     condo_user_first_name_kana: gimei.first.katakana,
     condo_user_address: address,
     condo_user_phone_number: phone_numbers[index],
-    condo_id: 5
+    condo_id: condos[4].id,
+    user_id: employee_users[1].id
   )
 end

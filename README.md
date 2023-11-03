@@ -172,6 +172,8 @@ email はマンション毎にアルファベットの a~e まで割り振って
 #### Association
 
 - has_many :condos
+- has_many :condo_users
+- has_many :condo_user_post_replies
 
 ### Condos テーブル
 
@@ -202,6 +204,7 @@ email はマンション毎にアルファベットの a~e まで割り振って
 
 - belongs_to :user
 - has_many :condo_users
+- has_many :condo_user_posts
 
 ### CondoUsers テーブル
 
@@ -221,6 +224,8 @@ email はマンション毎にアルファベットの a~e まで割り振って
 ### Association
 
 - belongs_to :condo
+- belongs_to :user
+- has_many :condo_user_post_replies
 
 ## 画面遷移図
 

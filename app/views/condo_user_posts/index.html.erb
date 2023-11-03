@@ -13,11 +13,11 @@
         </div>
         <div class="col">
           <div class="card shadow-sm">
-            <%= link_to condo_condo_user_posts_path(condo_id: current_condo_user.condo.id) do %>
+            <%= link_to new_condo_condo_user_post_path(condo_id: current_condo_user.condo.id) do %>
               <%= image_tag 'コメントアイコン7.png', alt: '相談履歴', class: 'bd-placeholder-img card-img-top top-icon' %>
             <% end %>
             <div class="card-body">
-              <p class="card-text">相談チャット</p>
+              <p class="card-text">お問い合わせ</p>
             </div>
           </div>
         </div>

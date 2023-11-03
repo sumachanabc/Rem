@@ -1,2 +1,33 @@
-<h1>CondoUserPosts#new</h1>
-<p>Find me in app/views/condo_user_posts/new.html.erb</p>
+<%= form_with model: [@condo, @condo_user_post], data: { turbo: false }, local: true do |f| %>
+  <%= render 'shared/error_messages', model: f.object %>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :title, 'タイトル', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :title, class:"input-default" %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :content, '内容', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_area :content, class: "input-default t-area-custom" %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :image, '画像', class: "form-text" %>
+      <span class="indispensable2">任意</span>
+    </div>
+    <%= f.file_field :image, class: "input-default" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit '投稿', data: { turbo: false } %>
+    <%= link_to '戻る', condo_condo_user_posts_path(@condo), class: "back-btn" %>
+  </div>
+
+<% end %>

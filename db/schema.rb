@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_22_054539) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_01_184314) do
   create_table "active_admin_comments", charset: "utf8", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -25,6 +25,58 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_22_054539) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
   end
 
+  create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", charset: "utf8", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", charset: "utf8", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "condo_user_post_replies", charset: "utf8", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "condo_user_id", null: false
+    t.bigint "condo_user_post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["condo_user_id"], name: "index_condo_user_post_replies_on_condo_user_id"
+    t.index ["condo_user_post_id"], name: "index_condo_user_post_replies_on_condo_user_post_id"
+    t.index ["user_id"], name: "index_condo_user_post_replies_on_user_id"
+  end
+
+  create_table "condo_user_posts", charset: "utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content", null: false
+    t.integer "status", default: 0, null: false
+    t.bigint "condo_user_id", null: false
+    t.bigint "condo_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["condo_id"], name: "index_condo_user_posts_on_condo_id"
+    t.index ["condo_user_id"], name: "index_condo_user_posts_on_condo_user_id"
+  end
+
   create_table "condo_users", charset: "utf8", force: :cascade do |t|
     t.integer "room_number", null: false
     t.string "condo_user_last_name", null: false
@@ -33,6 +85,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_22_054539) do
     t.string "condo_user_first_name_kana", null: false
     t.string "condo_user_address", null: false
     t.string "condo_user_phone_number", null: false
+    t.bigint "user_id", null: false
     t.bigint "condo_id", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -44,6 +97,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_22_054539) do
     t.index ["condo_id"], name: "index_condo_users_on_condo_id"
     t.index ["email"], name: "index_condo_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_condo_users_on_reset_password_token", unique: true
+    t.index ["user_id"], name: "index_condo_users_on_user_id"
   end
 
   create_table "condos", charset: "utf8", force: :cascade do |t|
@@ -89,6 +143,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_22_054539) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "condo_user_post_replies", "condo_user_posts"
+  add_foreign_key "condo_user_post_replies", "condo_users"
+  add_foreign_key "condo_user_post_replies", "users"
+  add_foreign_key "condo_user_posts", "condo_users"
+  add_foreign_key "condo_user_posts", "condos"
   add_foreign_key "condo_users", "condos"
+  add_foreign_key "condo_users", "users"
   add_foreign_key "condos", "users"
 end

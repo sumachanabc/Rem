@@ -5,6 +5,7 @@ class Condo < ApplicationRecord
   belongs_to :management_type, class_name: 'ManagementType', foreign_key: 'management_type_id'
   belongs_to :user
   has_many :condo_users
+  has_many :condo_user_posts
 
   # バリデーション
   with_options presence: true do
