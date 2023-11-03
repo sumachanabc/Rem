@@ -15,15 +15,22 @@
 
 <% @condo_user_post.condo_user_post_replies.each do |reply| %>
   <% if reply.user %>
-    <%# 管理会社のユーザーであれば誰でもコメントを表示 %>
-    管理会社: <%= reply.user.last_name %> <%= reply.user.first_name %>
-  <% end %>
-  <%# CondoUser から情報を取得 %>
-  <% if reply.condo_user %>
-    部屋番号: <%= reply.condo_user.room_number %>
-    氏名: <%= reply.condo_user.condo_user_last_name %> <%= reply.condo_user.condo_user_first_name %>
+    <div>
+      管理会社: <%= reply.user.last_name %> <%= reply.user.first_name %>
+      <p>コメント: <%= reply.content %></p>
+      <p>投稿日時: <%= l(reply.created_at, format: :long) %></p>
+    </div>
+  <% elsif reply.condo_user %>
+    <div>
+      部屋番号: <%= reply.condo_user.room_number %>
+      氏名: <%= reply.condo_user.condo_user_last_name %> <%= reply.condo_user.condo_user_first_name %>
+      <p>コメント: <%= reply.content %></p>
+      <p>投稿日時: <%= l(reply.created_at, format: :long) %></p>
+    </div>
   <% end %>
 <% end %>
+
+
 
 
 
