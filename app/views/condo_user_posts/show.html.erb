@@ -4,6 +4,7 @@
       <h1 class="card-title"><%= @condo_user_post.title %></h1>
       <h6 class="card-subtitle mb-2 text-muted">投稿日: <%= l(@condo_user_post.created_at, format: :long) %></h6>
       <div class="mb-3">
+        <span class="badge bg-primary">マンション名: <%= @condo_user_post.condo_user.condo.condo_name %></span>
         <span class="badge bg-secondary">部屋番号: <%= @condo_user_post.condo_user.room_number %></span>
         <span class="badge bg-secondary">氏名: <%= @condo_user_post.condo_user.condo_user_last_name %> <%= @condo_user_post.condo_user.condo_user_first_name %></span>
       </div>
@@ -31,11 +32,16 @@
   <% @condo_user_post.condo_user_post_replies.each_with_index do |reply, index| %>
     <div class="card mb-3">
       <div class="card-body">
-        <% if reply.user %>
-          <h5 class="card-title">管理会社: <%= reply.user.last_name %> <%= reply.user.first_name %></h5>
-        <% elsif reply.condo_user %>
-          <h5 class="card-title">部屋番号: <%= reply.condo_user.room_number %> 氏名: <%= reply.condo_user.condo_user_last_name %> <%= reply.condo_user.condo_user_first_name %></h5>
-        <% end %>
+      <% if reply.user %>
+        <div class="mb-3">
+          <span class="badge bg-secondary">管理会社: <%= reply.user.last_name %> <%= reply.user.first_name %></span>
+        </div>
+      <% elsif reply.condo_user %>
+        <div class="mb-3">
+          <span class="badge bg-secondary">部屋番号: <%= reply.condo_user.room_number %></span>
+          <span class="badge bg-secondary">氏名: <%= reply.condo_user.condo_user_last_name %> <%= reply.condo_user.condo_user_first_name %></span>
+        </div>
+      <% end %>
         <p class="card-text">コメント: <%= reply.content %></p>
         <p class="card-text"><small class="text-muted">投稿日時: <%= l(reply.created_at, format: :long) %></small></p>
         <% if reply.image.attached? %>
