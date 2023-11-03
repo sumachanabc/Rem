@@ -10,14 +10,17 @@
 <p>内容: <%= @condo_user_post.content %></p>
 
 <% @condo_user_post.condo_user_post_replies.each do |reply| %>
-  <%# 管理会社のユーザーであれば誰でもコメントを表示 %>
-  管理会社: <%= reply.user.last_name %> <%= reply.user.first_name %>
+  <% if reply.user %>
+    <%# 管理会社のユーザーであれば誰でもコメントを表示 %>
+    管理会社: <%= reply.user.last_name %> <%= reply.user.first_name %>
+  <% end %>
   <%# CondoUser から情報を取得 %>
   <% if reply.condo_user %>
     部屋番号: <%= reply.condo_user.room_number %>
     氏名: <%= reply.condo_user.condo_user_last_name %> <%= reply.condo_user.condo_user_first_name %>
   <% end %>
 <% end %>
+
 
 
 <%= form_with(

@@ -56,9 +56,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_184314) do
   create_table "condo_user_post_replies", charset: "utf8", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
+    t.bigint "condo_user_id", null: false
     t.bigint "condo_user_post_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["condo_user_id"], name: "index_condo_user_post_replies_on_condo_user_id"
     t.index ["condo_user_post_id"], name: "index_condo_user_post_replies_on_condo_user_post_id"
     t.index ["user_id"], name: "index_condo_user_post_replies_on_user_id"
   end
@@ -83,6 +85,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_184314) do
     t.string "condo_user_first_name_kana", null: false
     t.string "condo_user_address", null: false
     t.string "condo_user_phone_number", null: false
+    t.bigint "user_id", null: false
     t.bigint "condo_id", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -94,6 +97,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_184314) do
     t.index ["condo_id"], name: "index_condo_users_on_condo_id"
     t.index ["email"], name: "index_condo_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_condo_users_on_reset_password_token", unique: true
+    t.index ["user_id"], name: "index_condo_users_on_user_id"
   end
 
   create_table "condos", charset: "utf8", force: :cascade do |t|
@@ -142,9 +146,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_184314) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "condo_user_post_replies", "condo_user_posts"
+  add_foreign_key "condo_user_post_replies", "condo_users"
   add_foreign_key "condo_user_post_replies", "users"
   add_foreign_key "condo_user_posts", "condo_users"
   add_foreign_key "condo_user_posts", "condos"
   add_foreign_key "condo_users", "condos"
+  add_foreign_key "condo_users", "users"
   add_foreign_key "condos", "users"
 end

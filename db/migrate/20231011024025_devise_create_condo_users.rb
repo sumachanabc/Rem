@@ -12,6 +12,7 @@ class DeviseCreateCondoUsers < ActiveRecord::Migration[7.0]
       t.string  :condo_user_address,          null: false
       t.string  :condo_user_phone_number,     null: false
 
+      t.references :user,  null: false, foreign_key: true
       t.references :condo, null: false, foreign_key: true
 
       ## Database authenticatable
