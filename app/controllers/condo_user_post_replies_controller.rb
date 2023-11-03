@@ -40,7 +40,7 @@ class CondoUserPostRepliesController < ApplicationController
   end
 
   def reply_params
-    params.require(:condo_user_post_reply).permit(:content, images: [])
+    params.require(:condo_user_post_reply).permit(:content, :image)
   end
-end
 
+end

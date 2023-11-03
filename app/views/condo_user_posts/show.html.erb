@@ -30,13 +30,18 @@
   <% end %>
 </ul>
 
-<%= form_with(url: condo_condo_user_post_condo_user_post_replies_path(@condo_user_post.condo_id, @condo_user_post), local: true) do |form| %>
+<%= form_with(
+      model: CondoUserPostReply.new, 
+      url: condo_condo_user_post_condo_user_post_replies_path(@condo_user_post.condo_id, @condo_user_post), 
+      local: true
+    ) do |form| %>
   <%= form.label :content, "新しいコメント" %>
   <%= form.text_area :content %>
   <%= form.label :image, "画像を添付" %>
   <%= form.file_field :image %>
   <%= form.submit "コメントする" %>
 <% end %>
+
 
 
 

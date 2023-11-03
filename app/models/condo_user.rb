@@ -5,6 +5,8 @@ class CondoUser < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :condo
+  belongs_to :user
+  has_many :condo_user_post_replies
 
   with_options presence: true do
     validates :room_number, format: { with: /\A\d+\z/, message: 'は数字のみで入力してください' }

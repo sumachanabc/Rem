@@ -20,10 +20,10 @@ class CondoUserPostsController < ApplicationController
     end
   end
 
-def show
-  @condo_user_post = CondoUserPost.find(params[:id])
-  @condo_user_post_replies = @condo_user_post.condo_user_post_replies # この行を追加
-end
+  def show
+    @condo_user_post = CondoUserPost.find(params[:id])
+    @condo_user_post_replies = @condo_user_post.condo_user_post_replies # この行を追加
+  end
 
 
 private
