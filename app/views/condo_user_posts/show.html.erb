@@ -9,26 +9,16 @@
 
 <p>内容: <%= @condo_user_post.content %></p>
 
-<h2>コメント</h2>
-<ul>
-  <% @condo_user_post_replies.each do |reply| %>
-    <li>
-      <strong>
-        <% if reply.user.admin? || reply.user.manage? %>
-          管理会社: <%= reply.user.name %>
-        <% else %>
-          部屋番号: <%= reply.user.room_number %> 
-          氏名: <%= reply.user.condo_user_last_name %> <%= reply.user.condo_user_first_name %>
-        <% end %>
-        <% if reply.user.id == @condo_user_post.condo.user_id %>
-          (担当者)
-        <% end %>
-      </strong>
-      : <%= reply.content %>
-      <small><%= reply.created_at %></small>
-    </li>
+<% @condo_user_post.condo_user_post_replies.each do |reply| %>
+  <%# 管理会社のユーザーであれば誰でもコメントを表示 %>
+  管理会社: <%= reply.user.last_name %> <%= reply.user.first_name %>
+  <%# CondoUser から情報を取得 %>
+  <% if reply.condo_user %>
+    部屋番号: <%= reply.condo_user.room_number %>
+    氏名: <%= reply.condo_user.condo_user_last_name %> <%= reply.condo_user.condo_user_first_name %>
   <% end %>
-</ul>
+<% end %>
+
 
 <%= form_with(
       model: CondoUserPostReply.new, 
