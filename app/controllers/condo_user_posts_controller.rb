@@ -5,6 +5,10 @@ class CondoUserPostsController < ApplicationController
     @condo = current_condo_user.condo
   end
 
+  def inquiries
+    @condo_user_posts = CondoUserPost.where(condo_user: current_condo_user)
+  end
+
   def new
   @condo = Condo.find(params[:condo_id])
   @condo_user_post = @condo.condo_user_posts.build
