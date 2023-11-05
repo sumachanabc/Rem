@@ -8,8 +8,8 @@
 
 ## アップデート情報
 
-2023/10/22  
-管理者画面を実装しました(仮)。現状だと全てのユーザーから管理者画面の URL を入力してダイレクトにアクセス可能な状態なので後日修正します。
+2023/11/05  
+区分所有者相談機能及びコメント機能を実装しました(仮)。
 
 ## URL
 
@@ -88,6 +88,7 @@ email はマンション毎にアルファベットの a~e まで割り振って
 - マンション登録データの登録、一覧表示、詳細表示
 - 区分所有者データの登録、一覧表示
 - 社員データの登録
+- 区分所有者の相談機能&コメント機能
 - 社員ごとの権限管理
 - 管理者画面でのデータ一括管理
 
@@ -103,6 +104,7 @@ email はマンション毎にアルファベットの a~e まで割り振って
 ### 区分所有者側
 
 1. 区分所有者でログインし、自身が居住するマンションの情報が閲覧できます。
+2. マンションのことについてお問い合わせ機能を利用して相談できます。
 
 ### アプリケーションを作成した背景
 
@@ -148,7 +150,7 @@ email はマンション毎にアルファベットの a~e まで割り振って
 - マンション登録データの編集、削除※管理者画面以外で
 - 区分所有者データの詳細表示(マイページ)、編集、削除※管理者画面以外で
 - 社員データの詳細表示(顧客向けプロフ)、編集、削除
-- 駐輪場駐車場管理、相談履歴、書類保管閲覧、組合役員閲覧
+- 駐輪場駐車場管理、書類保管閲覧、組合役員閲覧
 - 簡易投票(アンケート)、更新履歴
 - 投票(総会)、マンション毎のチャット/掲示板
 - 会計機能、csv 出力
@@ -210,6 +212,7 @@ email はマンション毎にアルファベットの a~e まで割り振って
 
 | Column                     | Type       | Options                        |
 | -------------------------- | ---------- | ------------------------------ |
+| user                       | references | null: false, foreign_key: true |
 | condo                      | references | null: false, foreign_key: true |
 | room_number                | integer    | null: false                    |
 | condo_user_last_name       | string     | null: false                    |
@@ -223,9 +226,39 @@ email はマンション毎にアルファベットの a~e まで割り振って
 
 ### Association
 
-- belongs_to :condo
 - belongs_to :user
+- belongs_to :condo
 - has_many :condo_user_post_replies
+
+### CondoUserPosts テーブル
+
+| Column     | Type       | Options                        |
+| ---------- | ---------- | ------------------------------ |
+| condo      | references | null: false, foreign_key: true |
+| condo_user | references | null: false, foreign_key: true |
+| title      | string     | null: false                    |
+| content    | text       | null: false                    |
+| status     | integer    | null: false, default: 0        |
+
+#### Association
+
+- belongs_to :condo
+- belongs_to :condo_user
+
+### CondoUserPostReplies テーブル
+
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| user            | references | null: false, foreign_key: true |
+| condo_user      | references | null: false, foreign_key: true |
+| condo_user_post | references | null: false, foreign_key: true |
+| content         | text       |                                |
+
+#### Association
+
+- belongs_to :user
+- belongs_to :condo_user
+- belongs_to :condo_user_post
 
 ## 画面遷移図
 
