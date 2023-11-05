@@ -108,8 +108,8 @@ email はマンション毎にアルファベットの a~e まで割り振って
 
 ### アプリケーションを作成した背景
 
-前職の社内顧客管理システムを使用していましたが、日々お客様より受ける相談履歴を残せる機能がなく、
-そういう機能があればいいのにと思うことがあったので作ってみることにしました(現時点では実装予定の機能)。
+前職の社内顧客管理システムを使用していて、日々お客様より受ける相談履歴を残せる機能がなく、
+そういう機能があればいいのにと思うことがあったので作ってみることにしました。
 
 ## 洗い出した要件
 
@@ -232,10 +232,11 @@ email はマンション毎にアルファベットの a~e まで割り振って
 | email                      | string     | null: false, unique: true      |
 | encrypted_password         | string     | null: false,                   |
 
-### Association
+#### Association
 
 - belongs_to :user
 - belongs_to :condo
+- has_many :condo_user_posts
 - has_many :condo_user_post_replies
 
 ### CondoUserPosts テーブル
@@ -270,7 +271,7 @@ email はマンション毎にアルファベットの a~e まで割り振って
 
 ## 画面遷移図
 
-[![Image from Gyazo](https://i.gyazo.com/57546a3221aeb192eb3a90a094a7df44.png)](https://gyazo.com/57546a3221aeb192eb3a90a094a7df44)
+[![Image from Gyazo](https://i.gyazo.com/efa614ced0e9d2953d675a51450b0c2a.png)](https://gyazo.com/efa614ced0e9d2953d675a51450b0c2a)
 
 ## 開発環境
 
