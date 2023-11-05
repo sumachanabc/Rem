@@ -145,6 +145,14 @@ email はマンション毎にアルファベットの a~e まで割り振って
 
 [![Image from Gyazo](https://i.gyazo.com/0d3f5b4479b9d02bd8b3c62668dc03d9.png)](https://gyazo.com/0d3f5b4479b9d02bd8b3c62668dc03d9)
 
+### 区分所有者がお問い合わせ機能を利用して投稿
+
+[![Image from Gyazo](https://i.gyazo.com/b9363b0aed602d053f07353cc22f95b4.gif)](https://gyazo.com/b9363b0aed602d053f07353cc22f95b4)
+
+### 管理会社の社員が、担当物件の区分所有者からの問い合わせを確認
+
+[![Image from Gyazo](https://i.gyazo.com/9e14433afd77aca05de6c6ebe71636b3.gif)](https://gyazo.com/9e14433afd77aca05de6c6ebe71636b3)
+
 ## 今後実装したい機能
 
 - マンション登録データの編集、削除※管理者画面以外で
