@@ -1,0 +1,32 @@
+<div class="container mt-5">
+  <h2 class="mb-4">問い合わせ一覧</h2>
+  
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">投稿日</th>
+        <th scope="col">タイトル</th>
+        <th scope="col">コメント数</th>
+        <th scope="col">最新コメント</th>
+        <th scope="col">新着</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @condo_user_posts.each do |post| %>
+        <tr>
+          <td><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+          <td>
+            <%= link_to post.title, condo_condo_user_post_path(@condo, post), class: 'btn btn-link' %>
+          </td>
+          <td><%= post.condo_user_post_replies.count %></td>
+          <td><%= post.condo_user_post_replies.maximum(:created_at)&.strftime("%Y/%m/%d %H:%M") || 'コメントなし' %></td>
+          <td>
+            <% if post.condo_user_post_replies.any? && post.condo_user_post_replies.order(created_at: :desc).first.created_at > 1.day.ago %>
+              <span class="badge bg-success">new</span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
