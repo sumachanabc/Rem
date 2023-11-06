@@ -8,7 +8,6 @@
         <th scope="col">タイトル</th>
         <th scope="col">コメント数</th>
         <th scope="col">最新コメント</th>
-        <th scope="col">新着</th>
       </tr>
     </thead>
     <tbody>
@@ -21,9 +20,6 @@
           <td><%= post.condo_user_post_replies.count %></td>
           <td><%= post.condo_user_post_replies.maximum(:created_at)&.strftime("%Y/%m/%d %H:%M") || 'コメントなし' %></td>
           <td>
-            <% if post.condo_user_post_replies.any? && post.condo_user_post_replies.order(created_at: :desc).first.created_at > 1.day.ago %>
-              <span class="badge bg-success">new</span>
-            <% end %>
           </td>
         </tr>
       <% end %>
