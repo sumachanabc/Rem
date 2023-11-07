@@ -55,8 +55,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_184314) do
 
   create_table "condo_user_post_replies", charset: "utf8", force: :cascade do |t|
     t.text "content"
-    t.bigint "user_id", null: false
-    t.bigint "condo_user_id", null: false
+    t.bigint "user_id"
+    t.bigint "condo_user_id"
     t.bigint "condo_user_post_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
