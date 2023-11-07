@@ -1,13 +1,12 @@
 <div class="container mt-5">
-  <h2 class="mb-4"><%= @condo.condo_name %> の相談履歴</h2>
+  <h2 class="mb-4">問い合わせ一覧</h2>
   
   <table class="table table-hover">
     <thead>
       <tr>
         <th scope="col">投稿日</th>
         <th scope="col">タイトル</th>
-        <th scope="col">部屋番号</th>
-        <th scope="col">氏名</th>
+        <th scope="col">コメント数</th>
         <th scope="col">最新コメント</th>
       </tr>
     </thead>
@@ -18,14 +17,12 @@
           <td>
             <%= link_to post.title, condo_condo_user_post_path(@condo, post), class: 'btn btn-link' %>
           </td>
-          <td><%= post.condo_user.room_number %></td>
-          <td><%= post.condo_user.condo_user_last_name %> <%= post.condo_user.condo_user_first_name %></td>
+          <td><%= post.condo_user_post_replies.count %></td>
+          <td><%= post.condo_user_post_replies.maximum(:created_at)&.strftime("%Y/%m/%d %H:%M") || 'コメントなし' %></td>
           <td>
-            <%= post.condo_user_post_replies.maximum(:created_at)&.strftime("%Y/%m/%d %H:%M") || 'コメントなし' %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-

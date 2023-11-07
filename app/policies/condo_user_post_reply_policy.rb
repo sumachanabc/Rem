@@ -1,7 +1,9 @@
 class CondoUserPostReplyPolicy < ApplicationPolicy
+
   def create?
-    user.admin? || user.manage? || user.employee? || user.id == record.condo_user_id
+    true
   end
+  
 
   def update?
     create?

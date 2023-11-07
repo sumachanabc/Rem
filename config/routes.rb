@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     end
     resources :condo_users, only: [:index, :new, :create]
     resources :condo_user_posts, only: [:index, :new, :create, :show] do
+      collection do
+        get 'inquiries', to: 'condo_user_posts#inquiries'
+      end
       resources :condo_user_post_replies, only: [:create, :update]
     end
   end

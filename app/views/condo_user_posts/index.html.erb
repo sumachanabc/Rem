@@ -14,10 +14,20 @@
         <div class="col">
           <div class="card shadow-sm">
             <%= link_to new_condo_condo_user_post_path(condo_id: current_condo_user.condo.id) do %>
-              <%= image_tag 'コメントアイコン7.png', alt: '相談履歴', class: 'bd-placeholder-img card-img-top top-icon' %>
+              <%= image_tag 'テレフォンオペレーター.png', alt: 'お問い合わせはこちら', class: 'bd-placeholder-img card-img-top top-icon' %>
             <% end %>
             <div class="card-body">
               <p class="card-text">お問い合わせ</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <%= link_to inquiries_condo_condo_user_posts_path(@condo) do %>
+              <%= image_tag 'コメントアイコン7.png', alt: 'お問い合わせ一覧', class: 'bd-placeholder-img card-img-top top-icon' %>
+            <% end %>
+            <div class="card-body">
+              <p class="card-text">問い合わせ一覧</p>
             </div>
           </div>
         </div>

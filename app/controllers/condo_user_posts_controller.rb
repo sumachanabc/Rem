@@ -5,6 +5,18 @@ class CondoUserPostsController < ApplicationController
     @condo = current_condo_user.condo
   end
 
+  def inquiries
+    @condo = Condo.find(params[:condo_id]) # この行を追加
+    @condo_user_posts = CondoUserPost.where(condo_user: current_condo_user)
+                                     .includes(:condo_user_post_replies)
+                                     .sort_by { |post|
+                                       [
+                                         -post.created_at.to_i,
+                                         -post.condo_user_post_replies.count
+                                       ]
+                                     }
+  end
+
   def new
   @condo = Condo.find(params[:condo_id])
   @condo_user_post = @condo.condo_user_posts.build
