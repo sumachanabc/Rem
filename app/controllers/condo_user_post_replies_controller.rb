@@ -5,7 +5,7 @@ class CondoUserPostRepliesController < ApplicationController
   def create
     # current_user または current_condo_user が存在するか確認
     if current_user.nil? && current_condo_user.nil?
-      redirect_to some_path, alert: 'ログインが必要です'
+      redirect_to root_path, alert: 'ログインが必要です'
       return
     end
 
