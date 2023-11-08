@@ -166,7 +166,7 @@ email はマンション毎にアルファベットの a~e まで割り振って
 
 ## データベース設計
 
-[![Image from Gyazo](https://i.gyazo.com/9078763fd49f98da9dd3a4f68faf5a28.png)](https://gyazo.com/9078763fd49f98da9dd3a4f68faf5a28)
+[![Image from Gyazo](https://i.gyazo.com/efa614ced0e9d2953d675a51450b0c2a.png)](https://gyazo.com/efa614ced0e9d2953d675a51450b0c2a)
 
 ### Users テーブル
 
@@ -271,7 +271,7 @@ email はマンション毎にアルファベットの a~e まで割り振って
 
 ## 画面遷移図
 
-[![Image from Gyazo](https://i.gyazo.com/efa614ced0e9d2953d675a51450b0c2a.png)](https://gyazo.com/efa614ced0e9d2953d675a51450b0c2a)
+[![Image from Gyazo](https://i.gyazo.com/c13411c9e491d52649d5ad4588884330.png)](https://gyazo.com/c13411c9e491d52649d5ad4588884330)
 
 ## 開発環境
 
