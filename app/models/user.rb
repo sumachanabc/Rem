@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_many :condo_users
   has_many :condo_user_post_replies
 
+  has_many :visited_notifications, as: :visited, class_name: 'Notification', dependent: :destroy
+  has_many :visitor_notifications, as: :visitor, class_name: 'Notification', dependent: :destroy
+
   # roleを設定
   enum role: { employee: 0, admin: 1, manage: 2 }
 
