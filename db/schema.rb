@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_01_184314) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_08_075020) do
   create_table "active_admin_comments", charset: "utf8", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -126,6 +126,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_184314) do
     t.index ["user_id"], name: "index_condos_on_user_id"
   end
 
+  create_table "notifications", charset: "utf8", force: :cascade do |t|
+    t.string "visitor_type", null: false
+    t.bigint "visitor_id", null: false
+    t.string "visited_type", null: false
+    t.bigint "visited_id", null: false
+    t.bigint "condo_user_post_id"
+    t.bigint "condo_user_post_reply_id"
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["condo_user_post_id"], name: "index_notifications_on_condo_user_post_id"
+    t.index ["condo_user_post_reply_id"], name: "index_notifications_on_condo_user_post_reply_id"
+    t.index ["visited_type", "visited_id"], name: "index_notifications_on_visited"
+    t.index ["visitor_type", "visitor_id"], name: "index_notifications_on_visitor"
+  end
+
   create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "last_name", null: false
     t.string "first_name", null: false
@@ -153,4 +170,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_184314) do
   add_foreign_key "condo_users", "condos"
   add_foreign_key "condo_users", "users"
   add_foreign_key "condos", "users"
+  add_foreign_key "notifications", "condo_user_post_replies"
+  add_foreign_key "notifications", "condo_user_posts"
 end
