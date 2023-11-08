@@ -15,7 +15,7 @@
         <tr>
           <td><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></td>
           <td>
-            <%= link_to post.title, condo_condo_user_post_path(@condo, post), class: 'btn btn-link' %>
+            <%= link_to post.title, condo_condo_user_post_path(@condo, post), data: { turbo: false }, class: 'btn btn-link' %>
           </td>
           <td><%= post.condo_user_post_replies.count %></td>
           <td><%= post.condo_user_post_replies.maximum(:created_at)&.strftime("%Y/%m/%d %H:%M") || 'コメントなし' %></td>

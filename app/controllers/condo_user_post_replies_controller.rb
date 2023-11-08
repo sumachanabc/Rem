@@ -17,7 +17,7 @@ class CondoUserPostRepliesController < ApplicationController
     if @reply.save
       redirect_to [@condo_user_post.condo, @condo_user_post], notice: 'コメントが投稿されました'
     else
-      puts @reply.errors.full_messages # これでエラーメッセージを確認できます
+      puts @reply.errors.full_messages
       redirect_to [@condo_user_post.condo, @condo_user_post], alert: 'コメントの保存に失敗しました'
     end
   end
@@ -33,7 +33,8 @@ class CondoUserPostRepliesController < ApplicationController
   end
 
   def reply_params
-    params.require(:condo_user_post_reply).permit(:content)
+    params.require(:condo_user_post_reply).permit(:content, :image)
   end
+  
 
 end
