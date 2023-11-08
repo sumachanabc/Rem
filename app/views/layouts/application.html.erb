@@ -43,6 +43,12 @@
                 ようこそ、<%= "#{current_user.last_name} #{current_user.first_name}" %> さん
               </span>
 
+              <%= link_to notifications_path, class: "notification-link" do %>
+                <span class="material-symbols-outlined">
+                  notifications
+                </span>
+              <% end %>
+
               <% if current_user.admin? %>
                 <%# 管理者の場合 %>
                 <%= link_to "管理者画面", admin_root_path, class: "btn btn-success", role: "button" %>
