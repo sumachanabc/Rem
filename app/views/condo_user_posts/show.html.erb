@@ -38,6 +38,7 @@
         </div>
       <% elsif reply.condo_user %>
         <div class="mb-3">
+          <span class="badge bg-primary">マンション名: <%= @condo_user_post.condo_user.condo.condo_name %></span>
           <span class="badge bg-secondary">部屋番号: <%= reply.condo_user.room_number %></span>
           <span class="badge bg-secondary">氏名: <%= reply.condo_user.condo_user_last_name %> <%= reply.condo_user.condo_user_first_name %></span>
         </div>
@@ -83,7 +84,7 @@
       <%= form.label :image, "画像を添付", class: "form-label" %>
       <%= form.file_field :image, class: "form-control" %>
     </div>
-    <%= form.submit "コメントする", class: "btn btn-primary" %>
+    <%= form.submit "コメントする",  data: { turbo: false }, class: "btn btn-primary" %>
   <% end %>
 </div>
 
