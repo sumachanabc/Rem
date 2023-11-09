@@ -1,9 +1,11 @@
 class Notification < ApplicationRecord
-  scope :unread, -> { where(checked: false) }
-  
   belongs_to :visitor, polymorphic: true
   belongs_to :visited, polymorphic: true
-  belongs_to :condo_user_post
-  belongs_to :condo_user_post_reply, class_name: 'CondoUserPostReply'
+  belongs_to :condo_user_post, optional: true
+  belongs_to :condo_user_post_reply, optional: true
+
+  def condo_id
+    CondoUserPost.find_by(id: condo_user_post_id)&.condo_id
+  end
 
 end
