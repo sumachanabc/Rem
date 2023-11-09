@@ -82,6 +82,11 @@
               <%# 社員ユーザーがログインしていない場合 %>
             <% end %>
             <% if condo_user_signed_in? %>
+              <%= link_to notifications_path, class: "notification-link" do %>
+                <span class="material-symbols-outlined">
+                  notifications
+                </span>
+              <% end %>
               <%= link_to 'ログアウト', destroy_condo_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-light me-2", role: "button"  %>
             <% else %>
             <% end %>
