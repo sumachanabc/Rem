@@ -1,9 +1,13 @@
 class NotificationsController < ApplicationController
 
   def index
-    @visited_notifications = current_user.visited_notifications.order(created_at: :desc)
-    @visitor_notifications = current_user.visitor_notifications.order(created_at: :desc)
-    @notifications = (@visited_notifications + @visitor_notifications).sort_by(&:created_at).reverse
+    user_or_condo_user = current_user || current_condo_user
+    
+    if user_or_condo_user
+      @notifications = user_or_condo_user.visited_notifications.order(created_at: :desc)
+    else
+      redirect_to root_path, alert: 'ログインが必要です。'
+    end
   end
 
   def mark_all_as_read
