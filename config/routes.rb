@@ -24,6 +24,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :notifications, only: [:index] do
+    collection do
+      patch :mark_all_as_read
+    end
+  end
+
   root to: 'condos#index'
 
   # Active Admin routes

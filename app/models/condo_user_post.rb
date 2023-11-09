@@ -9,5 +9,22 @@ class CondoUserPost < ApplicationRecord
 
   validates :title, presence: true
   validates :content, presence: true
+
+  after_create :create_notification_for_user
+
+  private
+
+  def create_notification_for_user
+    user = self.condo_user.user
+
+    notification = Notification.create(
+      visitor_type: 'CondoUser',
+      visitor_id: self.condo_user_id,
+      visited_type: 'User',
+      visited_id: user.id,
+      condo_user_post_id: self.id,
+      action: 'posted'
+    )
+  end
 end
 

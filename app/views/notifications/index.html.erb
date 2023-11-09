@@ -1,0 +1,72 @@
+<h1 class="mb-4">Notifications</h1>
+
+<div class="list-group">
+  <% @notifications.each do |notification| %>
+    <!-- 現在ログインしているユーザーまたは区分所有者が通知の送信者でない場合のみ表示 -->
+    <% next if (current_user && current_user.class.name == notification.visitor_type && current_user.id == notification.visitor_id) || (current_condo_user && current_condo_user.class.name == notification.visitor_type && current_condo_user.id == notification.visitor_id) %>
+    <div class="list-group-item list-group-item-action flex-column align-items-start <%= 'list-group-item-secondary' if notification.checked %>">
+      <div class="d-flex w-100 justify-content-between">
+        <% if notification.action == 'comment' %>
+          <% comment = notification.condo_user_post_reply %>
+          <% post = comment.condo_user_post %>
+          <% visitor = notification.visitor_type.constantize.find_by(id: notification.visitor_id) %>
+          <div class="mb-1">
+            <strong>
+              <% if visitor.is_a?(User) %>
+                <%= "#{visitor.last_name} #{visitor.first_name}さんが" %> <%= link_to "「#{post.title.truncate(10)}」", condo_condo_user_post_path(post.condo_id, post.id) %> <%= "にコメントしました" %>
+              <% elsif visitor.is_a?(CondoUser) %>
+                <%= "#{visitor.condo.condo_name}の#{visitor.room_number}号室#{visitor.full_name}さんが" %> <%= link_to "「#{post.title.truncate(10)}」", condo_condo_user_post_path(post.condo_id, post.id) %> <%= "にコメントしました" %>
+              <% end %>
+            </strong>
+            <p class="mb-0 text-muted" style="font-size: smaller;">
+              <%= time_ago_in_words(notification.created_at) %>前<br>
+              <%= comment.content.truncate(50) %>
+            </p>
+          </div>
+        <% elsif notification.action == 'posted' %>
+          <% condo_user_post = CondoUserPost.find_by(id: notification.condo_user_post_id) %>
+          <% condo_user = condo_user_post.condo_user %>
+          <div class="mb-1">
+            <strong>
+              <%= "#{condo_user.condo.condo_name}の#{condo_user.room_number}号室#{condo_user.full_name}さんが" %> <%= link_to "「#{condo_user_post.title.truncate(10)}」", condo_condo_user_post_path(condo_user_post.condo_id, condo_user_post.id) %> <%= "を投稿しました" %>
+            </strong>
+            <p class="mb-0 text-muted" style="font-size: smaller;">
+              <%= time_ago_in_words(notification.created_at) %>前<br>
+              <%= condo_user_post.content.truncate(50) %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+      <% if notification.checked %>
+        <span class="badge badge-secondary badge-pill">Read</span>
+      <% else %>
+        <span class="badge badge-primary badge-pill">Unread</span>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

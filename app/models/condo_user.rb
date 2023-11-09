@@ -21,4 +21,9 @@ class CondoUser < ApplicationRecord
     validates :condo_user_phone_number, format: { with: /\A\d+\z/, message: 'は数字のみで入力してください' }
   end
   validates :password, format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/, message: 'は英字と数字の両方を含む必要があります' }
+
+  def full_name
+    "#{condo_user_last_name} #{condo_user_first_name}"
+  end
+
 end
