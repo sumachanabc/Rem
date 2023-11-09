@@ -15,7 +15,6 @@ class CondoUserPost < ApplicationRecord
   private
 
   def create_notification_for_user
-    Rails.logger.info 'create_notification_for_userメソッドが呼び出されました。'
     user = self.condo_user.user
 
     notification = Notification.create(
@@ -26,12 +25,6 @@ class CondoUserPost < ApplicationRecord
       condo_user_post_id: self.id,
       action: 'posted'
     )
-
-    if notification.save
-      Rails.logger.info '通知が正常に作成されました。'
-    else
-      Rails.logger.info "通知の作成に失敗しました: #{notification.errors.full_messages.join(", ")}"
-    end
   end
 end
 
