@@ -1,13 +1,26 @@
+<!-- app/views/notifications/index.html.erb -->
 <h1>Notifications</h1>
 
-<% if @notifications.present? %>
-  <% @notifications.each do |notification| %>
-    <div>
-      <!-- 通知の内容を表示 -->
-      <%= notification.content %>
-    </div>
-  <% end %>
-<% else %>
-  <p>通知はありません</p>
+<% @notifications.each do |notification| %>
+  <div>
+    <% if notification.action == 'comment' %>
+      <%= link_to 'New comment on your inquiry', condo_condo_user_post_path(notification.condo_user_post_reply.condo_user_post.condo_id, notification.condo_user_post_reply.condo_user_post_id) %>
+    <% elsif notification.action == 'posted' %>
+      <% if (condo_user_post = CondoUserPost.find_by(id: notification.condo_user_post_id)) %>
+        <%= link_to 'New post in your condo', condo_condo_user_post_path(condo_user_post.condo_id, condo_user_post.id) %>
+      <% end %>
+    <% end %>
+    <!-- 通知の既読/未読状態を表示する -->
+    <% if notification.checked %>
+      <span>Read</span>
+    <% else %>
+      <span>Unread</span>
+    <% end %>
+  </div>
 <% end %>
+
+
+
+
+
 
