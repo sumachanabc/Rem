@@ -10,11 +10,25 @@ class NotificationsController < ApplicationController
     end
   end
 
-  def mark_all_as_read
-    current_user.visited_notifications.unread.update_all(checked: true)
-    respond_to do |format|
-      format.html { redirect_to notifications_path, notice: '全ての通知を既読にしました。' }
-      format.js # JavaScriptのレスポンスを処理する場合
+  def mark_as_read_and_redirect
+    notification = Notification.find(params[:id])
+    notification.update(checked: true) unless notification.checked
+    redirect_to appropriate_path(notification)
+  end
+
+  private
+
+  def appropriate_path(notification)
+    # 通知の種類に応じてリダイレクト先を決定
+    if notification.action == 'comment'
+      comment = notification.condo_user_post_reply
+      post = comment.condo_user_post
+      condo_condo_user_post_path(post.condo_id, post.id)
+    elsif notification.action == 'posted'
+      condo_user_post = notification.condo_user_post
+      condo_condo_user_post_path(condo_user_post.condo_id, condo_user_post.id)
+    else
+      # 他の通知タイプに対するリダイレクト先をここに追加
     end
   end
 end

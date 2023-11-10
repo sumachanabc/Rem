@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :basic_auth
   before_action :authenticate
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_unread_notifications_count
 
   include Pundit::Authorization
   # Punditを適用するcontrollerの継承元でincludeする。
@@ -39,4 +40,15 @@ class ApplicationController < ActionController::Base
       :sign_up, keys: [:first_name, :last_name, :first_name_kana, :last_name_kana]
     )
   end
+
+  def set_unread_notifications_count
+    if user_signed_in?
+      @unread_count = Notification.where(visited: current_user, checked: false).count
+    elsif condo_user_signed_in?
+      @unread_count = Notification.where(visited: current_condo_user, checked: false).count
+    else
+      @unread_count = 0
+    end
+  end
+
 end
