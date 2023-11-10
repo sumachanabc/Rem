@@ -24,11 +24,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :notifications, only: [:index] do
-    collection do
-      patch :mark_all_as_read
+  resources :notifications do
+    member do
+      get :mark_as_read_and_redirect
     end
   end
+
 
   root to: 'condos#index'
 
