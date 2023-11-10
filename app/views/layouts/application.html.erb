@@ -18,23 +18,29 @@
             <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
           </a>
 
-          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <% if user_signed_in? %>
-              <li><%= link_to "Home", root_path, class: "nav-link px-2 text-secondary" %></li>
-            <% else %>
-              <li><%= link_to "Home", "#", style: "display:none;" %></li>
-            <% end %>
+<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+  <% if user_signed_in? %>
+    <li>
+      <%= link_to root_path, class: "nav-link px-2 text-secondary" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+          <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"></path>
+          <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"></path>
+        </svg>
+      <% end %>
+    </li>
+  <% end %>
 
-            <% if condo_user_signed_in? %>
-              <li><%= link_to "Home", condo_condo_user_posts_path(condo_id: current_condo_user.condo.id), class: "nav-link px-2 text-secondary" %></li>
-            <% else %>
-              <li><%= link_to "Home", "#", style: "display:none;" %></li>
-            <% end %>
-          </ul>
-
-          <%# <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-            <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
-          </form> %>
+  <% if condo_user_signed_in? %>
+    <li>
+      <%= link_to condo_condo_user_posts_path(condo_id: current_condo_user.condo.id), class: "nav-link px-2 text-secondary" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+          <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"></path>
+          <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"></path>
+        </svg>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
 
           <div class="text-end">
             <% if user_signed_in? %>
@@ -43,10 +49,18 @@
                 ようこそ、<%= "#{current_user.last_name} #{current_user.first_name}" %> さん
               </span>
 
-              <%= link_to notifications_path, class: "notification-link" do %>
-                <span class="material-symbols-outlined">
-                  notifications
-                </span>
+              <% if user_signed_in? || condo_user_signed_in? %>
+                <%= link_to notifications_path, class: "btn btn-secondary position-relative" do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"></path>
+                  </svg>
+                  <% if @unread_count.to_i > 0 %>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="z-index: 1000; position: relative;">
+                      <%= @unread_count %>
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+                  <% end %>
+                <% end %>
               <% end %>
 
               <% if current_user.admin? %>
@@ -82,10 +96,21 @@
               <%# 社員ユーザーがログインしていない場合 %>
             <% end %>
             <% if condo_user_signed_in? %>
-              <%= link_to notifications_path, class: "notification-link" do %>
-                <span class="material-symbols-outlined">
-                  notifications
-                </span>
+              <span>
+                ようこそ、<%= "#{current_condo_user.condo_user_last_name} #{current_condo_user.condo_user_first_name}" %> さん
+              </span>
+              <% if user_signed_in? || condo_user_signed_in? %>
+                <%= link_to notifications_path, class: "btn btn-secondary position-relative" do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"></path>
+                  </svg>
+                  <% if @unread_count.to_i > 0 %>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="z-index: 1000; position: relative;">
+                      <%= @unread_count %>
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+                  <% end %>
+                <% end %>
               <% end %>
               <%= link_to 'ログアウト', destroy_condo_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-light me-2", role: "button"  %>
             <% else %>
