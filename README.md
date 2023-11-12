@@ -9,9 +9,9 @@
 ## アップデート情報
 
 2023/11/05  
-区分所有者相談機能及びコメント機能を実装しました(仮)。
-2023/11/10
-相談機能及びコメント機能に対する通知機能を実装しました(仮)。
+区分所有者相談機能及びコメント機能を実装しました。  
+2023/11/10  
+相談機能及びコメント機能に対する通知機能を実装しました。
 
 ## URL
 
@@ -120,6 +120,24 @@ email はマンション毎にアルファベットの a~e まで割り振って
 
 ## 実装した機能についての画像や GIF およびその説明
 
+### 各トップページ(2023/11/12 最新)
+
+- 管理者
+  [![管理者](https://i.gyazo.com/fa37f506a9dc5fab235f2c932708b763.png)](https://gyazo.com/fa37f506a9dc5fab235f2c932708b763)
+- 役職者
+  [![役職者](https://i.gyazo.com/7597e0e6905f170f38673bc9d28c6473.png)](https://gyazo.com/7597e0e6905f170f38673bc9d28c6473)
+- 一般社員
+  [![Image from Gyazo](https://i.gyazo.com/8f4e36fd3c76db0326b6f828e7405178.png)](https://gyazo.com/8f4e36fd3c76db0326b6f828e7405178)
+- 区分所有者
+  [![Image from Gyazo](https://i.gyazo.com/187dea39fef010c36d1bbf8f1b63db6c.png)](https://gyazo.com/187dea39fef010c36d1bbf8f1b63db6c)
+
+### 通知一覧ページ
+
+- 一般社員
+  [![Image from Gyazo](https://i.gyazo.com/bac3b900b25a9553a615298fffe4320c.png)](https://gyazo.com/bac3b900b25a9553a615298fffe4320c)
+- 区分所有者
+  [![Image from Gyazo](https://i.gyazo.com/2b0cb62f4e1f5ddec0b4d8fd29d52fd7.png)](https://gyazo.com/2b0cb62f4e1f5ddec0b4d8fd29d52fd7)
+
 ### 管理者ユーザーによる各種新規登録画面へのアクセス
 
 [![管理者ユーザーによる各種新規登録](https://i.gyazo.com/56387887ae74a866894fed11542917de.gif)](https://gyazo.com/56387887ae74a866894fed11542917de)
@@ -169,7 +187,7 @@ email はマンション毎にアルファベットの a~e まで割り振って
 
 ## データベース設計
 
-[![Image from Gyazo](https://i.gyazo.com/efa614ced0e9d2953d675a51450b0c2a.png)](https://gyazo.com/efa614ced0e9d2953d675a51450b0c2a)
+[![Image from Gyazo](https://i.gyazo.com/5909a29f7c205bc00e74bb57e7f30aab.png)](https://gyazo.com/5909a29f7c205bc00e74bb57e7f30aab)
 
 ### Users テーブル
 
@@ -187,6 +205,8 @@ email はマンション毎にアルファベットの a~e まで割り振って
 - has_many :condos
 - has_many :condo_users
 - has_many :condo_user_post_replies
+- has_many :visited_notifications
+- has_many :visitor_notifications
 
 ### Condos テーブル
 
@@ -241,6 +261,8 @@ email はマンション毎にアルファベットの a~e まで割り振って
 - belongs_to :condo
 - has_many :condo_user_posts
 - has_many :condo_user_post_replies
+- has_many :visited_notifications
+- has_many :visitor_notifications
 
 ### CondoUserPosts テーブル
 
@@ -256,6 +278,7 @@ email はマンション毎にアルファベットの a~e まで割り振って
 
 - belongs_to :condo
 - belongs_to :condo_user
+- has_many :notifications
 
 ### CondoUserPostReplies テーブル
 
@@ -271,10 +294,29 @@ email はマンション毎にアルファベットの a~e まで割り振って
 - belongs_to :user
 - belongs_to :condo_user
 - belongs_to :condo_user_post
+- has_many :notifications
+
+### Notifications テーブル
+
+| Column                   | Type       | Options                                             |
+| ------------------------ | ---------- | --------------------------------------------------- |
+| visitor_id               | references | null: false, polymorphic: true                      |
+| visited_id               | references | null: false, polymorphic: true                      |
+| condo_user_post_id       | references | foreign_key: true                                   |
+| condo_user_post_reply_id | references | foreign_key: { to_table: :condo_user_post_replies } |
+| action                   | string     | default: '', null: false                            |
+| checked                  | boolean    | default: false, null: false                         |
+
+#### Association
+
+- belongs_to :visitor
+- belongs_to :visited
+- belongs_to :condo_user_post
+- belongs_to :condo_user_post_reply
 
 ## 画面遷移図
 
-[![Image from Gyazo](https://i.gyazo.com/c13411c9e491d52649d5ad4588884330.png)](https://gyazo.com/c13411c9e491d52649d5ad4588884330)
+[![Image from Gyazo](https://i.gyazo.com/4971356acf029be6403edf8731d1b8dd.png)](https://gyazo.com/4971356acf029be6403edf8731d1b8dd)
 
 ## 開発環境
 
@@ -305,3 +347,4 @@ $ http://localhost:3000
 - エラーハンドリング日本語化
 - レスポンシブ対応
 - 一部入力項目をアクティブハッシュで実装
+- ポリモーフィック関連を使用した通知機能
