@@ -19,7 +19,6 @@ class NotificationsController < ApplicationController
   private
 
   def appropriate_path(notification)
-    # 通知の種類に応じてリダイレクト先を決定
     if notification.action == 'comment'
       comment = notification.condo_user_post_reply
       post = comment.condo_user_post
@@ -28,7 +27,6 @@ class NotificationsController < ApplicationController
       condo_user_post = notification.condo_user_post
       condo_condo_user_post_path(condo_user_post.condo_id, condo_user_post.id)
     else
-      # 他の通知タイプに対するリダイレクト先をここに追加
     end
   end
 end
