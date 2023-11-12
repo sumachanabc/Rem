@@ -349,3 +349,27 @@ phone_numbers = Array.new(10) { "080#{rand(10000000..99999999)}" }
     user_id: employee_users[1].id
   )
 end
+
+condo_user_post = CondoUserPost.create!(
+  title: '共有施設の予約方法について',
+  content: 'いつもお世話になっております。共有の会議室を利用したいのですが、予約方法を教えてください。',
+  status: 0,
+  condo_user_id: CondoUser.first.id,
+  condo_id: Condo.first.id
+)
+
+comments = [
+  { content: 'いつもお世話になっております。お問い合わせありがとうございます。会議室の予約は、管理事務所から行うことができます。管理員までお申し付けくださいませ。', user_id: User.first.id },
+  { content: '管理事務所での予約了解しました。ちなみに食べ物の持込みは可能ですか？', condo_user_id: CondoUser.first.id },
+  { content: '食べ物の持込みは可能です。退室前に備え付けの掃除機で掃除をお願いいたします。', user_id: User.first.id },
+  { content: '承知いたしました。ありがとうございました。', condo_user_id: CondoUser.first.id }
+]
+
+comments.each do |comment|
+  CondoUserPostReply.create!(
+    content: comment[:content],
+    user_id: comment[:user_id],
+    condo_user_id: comment[:condo_user_id],
+    condo_user_post_id: condo_user_post.id
+  )
+end
