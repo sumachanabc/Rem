@@ -11,115 +11,93 @@
   </head>
 
   <body>
-    <header class="p-3 text-bg-dark">
-      <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-          </a>
+<header class="p-3 text-bg-dark">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+      </a>
 
-<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-  <% if user_signed_in? %>
-    <li>
-      <%= link_to root_path, class: "nav-link px-2 text-secondary" do %>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-          <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"></path>
-          <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"></path>
-        </svg>
-      <% end %>
-    </li>
-  <% end %>
-
-  <% if condo_user_signed_in? %>
-    <li>
-      <%= link_to condo_condo_user_posts_path(condo_id: current_condo_user.condo.id), class: "nav-link px-2 text-secondary" do %>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-          <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"></path>
-          <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"></path>
-        </svg>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
-
-          <div class="text-end">
-            <% if user_signed_in? %>
-              <%# ユーザーがログインしている場合 %>
-              <span>
-                ようこそ、<%= "#{current_user.last_name} #{current_user.first_name}" %> さん
-              </span>
-
-              <% if user_signed_in? || condo_user_signed_in? %>
-                <%= link_to notifications_path, class: "btn btn-secondary position-relative" do %>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
-                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"></path>
-                  </svg>
-                  <% if @unread_count.to_i > 0 %>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="z-index: 1000; position: relative;">
-                      <%= @unread_count %>
-                      <span class="visually-hidden">unread messages</span>
-                    </span>
-                  <% end %>
-                <% end %>
-              <% end %>
-
-              <% if current_user.admin? %>
-                <%# 管理者の場合 %>
-                <%= link_to "管理者画面", admin_root_path, class: "btn btn-success", role: "button" %>
-                <%= link_to "区分所有者登録", new_condo_user_registration_path, data: { turbo: false }, class: "btn btn-warning", role: "button" %>
-                <%= link_to "社員登録", new_user_registration_path, data: { turbo: false }, class: "btn btn-warning", role: "button" %>
-                <%= link_to "マンション登録", new_condo_path, data: { turbo: false }, class: "btn btn-warning", role: "button" %>
-                <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-light me-2", role: "button"  %>
-
-              <% elsif current_user.manage? %>
-                <%# マネージャーの場合 %>
-                <%= link_to "社員登録", new_user_registration_path, data: { turbo: false }, class: "btn btn-warning", role: "button" %>
-                <%= link_to "マンション登録", new_condo_path, data: { turbo: false }, class: "btn btn-warning", role: "button" %>
-                <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-light me-2", role: "button"  %>
-
-              <% else %>
-                <%# 社員の場合 %>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    担当物件
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <% current_user.condos.each do |condo| %>
-                      <li><%= link_to condo.condo_name, condo_path(condo), class: "dropdown-item" %></li>
-                    <% end %>
-                  </ul>
-                </div>
-                <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-light", role: "button"  %>
-              <% end %>
-
-            <% else %>
-              <%# 社員ユーザーがログインしていない場合 %>
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <% if user_signed_in? %>
+          <li>
+            <%= link_to root_path, class: "nav-link px-2 text-secondary" do %>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"></path>
+                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"></path>
+              </svg>
             <% end %>
-            <% if condo_user_signed_in? %>
-              <span>
-                ようこそ、<%= "#{current_condo_user.condo_user_last_name} #{current_condo_user.condo_user_first_name}" %> さん
-              </span>
-              <% if user_signed_in? || condo_user_signed_in? %>
-                <%= link_to notifications_path, class: "btn btn-secondary position-relative" do %>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
-                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"></path>
-                  </svg>
-                  <% if @unread_count.to_i > 0 %>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="z-index: 1000; position: relative;">
-                      <%= @unread_count %>
-                      <span class="visually-hidden">unread messages</span>
-                    </span>
-                  <% end %>
-                <% end %>
-              <% end %>
-              <%= link_to 'ログアウト', destroy_condo_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-light me-2", role: "button"  %>
-            <% else %>
+          </li>
+        <% elsif condo_user_signed_in? %>
+          <li>
+            <%= link_to condo_condo_user_posts_path(condo_id: current_condo_user.condo.id), class: "nav-link px-2 text-secondary" do %>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"></path>
+                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"></path>
+              </svg>
             <% end %>
-          </div>
+          </li>
+        <% end %>
+      </ul>
 
-        </div>
+      <div class="text-end">
+        <% if user_signed_in? %>
+          <span>ようこそ、<%= "#{current_user.last_name} #{current_user.first_name}" %> さん</span>
+          <%= render 'shared/notification_badge' %>
+
+          <% if current_user.admin? %>
+            <%= link_to "管理者画面", admin_root_path, class: "btn btn-success", role: "button" %>
+
+            <div class="btn-group">
+              <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
+                </svg>
+              </button>
+              <ul class="dropdown-menu">
+                <%= link_to "区分所有者登録", new_condo_user_registration_path, data: { turbo: false }, class: "dropdown-item" %>
+                <%= link_to "社員登録", new_user_registration_path, data: { turbo: false }, class: "dropdown-item" %>
+                <%= link_to "マンション登録", new_condo_path, data: { turbo: false }, class: "dropdown-item" %>
+              </ul>
+            </div>
+          <% elsif current_user.manage? %>
+            <div class="btn-group">
+              <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
+                </svg>
+              </button>
+              <ul class="dropdown-menu">
+                <%= link_to "区分所有者登録", new_condo_user_registration_path, data: { turbo: false }, class: "dropdown-item" %>
+                <%= link_to "マンション登録", new_condo_path, data: { turbo: false }, class: "dropdown-item" %>
+              </ul>
+            </div>
+          <% elsif current_user.employee? %>
+            <div class="btn-group">
+              <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                担当物件
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <% current_user.condos.each do |condo| %>
+                  <li><%= link_to condo.condo_name, condo_path(condo), class: "dropdown-item" %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-light me-2", role: "button"  %>
+
+        <% elsif condo_user_signed_in? %>
+          <span>ようこそ、<%= "#{current_condo_user.condo_user_last_name} #{current_condo_user.condo_user_first_name}" %> さん</span>
+          <%= render 'shared/notification_badge' %>
+          <%= link_to 'ログアウト', destroy_condo_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-light me-2", role: "button"  %>
+        <% end %>
+
       </div>
-    </header>
+    </div>
+  </div>
+</header>
+
+
 
 <% if flash[:alert] || flash[:notice] %>
   <div class="alert <%= flash[:alert] ? 'alert-danger' : 'alert-success' %>" role="alert">
