@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       resources :condo_user_post_replies, only: [:create, :update]
     end
 
-    resources :documents, only: [:index, :new, :create, :show]
+    resources :documents, only: [:index, :new, :create]
   end
 
   resources :notifications do
