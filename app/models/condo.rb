@@ -6,6 +6,7 @@ class Condo < ApplicationRecord
   belongs_to :user
   has_many :condo_users
   has_many :condo_user_posts
+  has_many :documents, dependent: :destroy
 
   # バリデーション
   with_options presence: true do

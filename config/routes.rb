@@ -22,6 +22,8 @@ Rails.application.routes.draw do
       end
       resources :condo_user_post_replies, only: [:create, :update]
     end
+
+    resources :documents, only: [:index, :new, :create, :show]
   end
 
   resources :notifications do

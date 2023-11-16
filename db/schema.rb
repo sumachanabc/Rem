@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_08_075020) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_16_101528) do
   create_table "active_admin_comments", charset: "utf8", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -126,6 +126,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_08_075020) do
     t.index ["user_id"], name: "index_condos_on_user_id"
   end
 
+  create_table "documents", charset: "utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "category_id", null: false
+    t.bigint "condo_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["condo_id"], name: "index_documents_on_condo_id"
+    t.index ["user_id"], name: "index_documents_on_user_id"
+  end
+
   create_table "notifications", charset: "utf8", force: :cascade do |t|
     t.string "visitor_type", null: false
     t.bigint "visitor_id", null: false
@@ -170,6 +181,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_08_075020) do
   add_foreign_key "condo_users", "condos"
   add_foreign_key "condo_users", "users"
   add_foreign_key "condos", "users"
+  add_foreign_key "documents", "condos"
+  add_foreign_key "documents", "users"
   add_foreign_key "notifications", "condo_user_post_replies"
   add_foreign_key "notifications", "condo_user_posts"
 end
