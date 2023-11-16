@@ -5,8 +5,10 @@ class DocumentCategory < ActiveHash::Base
     { id: 3, name: '総会議事録' },
     { id: 4, name: '理事会資料' },
     { id: 5, name: '理事会議事録' },
-    { id: 6, name: '竣工図' },
-    { id: 7, name: '長期修繕計画' }
+    { id: 6, name: '管理委託契約' },
+    { id: 7, name: '管理規約' },
+    { id: 8, name: '竣工図' },
+    { id: 9, name: '長期修繕計画' }
   ]
 
   include ActiveHash::Associations
