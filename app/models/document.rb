@@ -1,4 +1,5 @@
 class Document < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
   belongs_to :condo
   has_one_attached :file
