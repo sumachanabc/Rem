@@ -79,7 +79,6 @@ end
 gem 'pry-rails'
 gem 'devise'
 gem 'bootstrap', '~> 5.2.3'
-gem 'jquery-rails'
 gem 'mini_racer'
 gem 'pundit'
 gem 'active_hash'
