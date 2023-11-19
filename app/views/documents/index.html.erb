@@ -1,2 +1,56 @@
-<h1>Documents#index</h1>
-<p>Find me in app/views/documents/index.html.erb</p>
+<style>
+  .nav-tabs .nav-link.active {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #dee2e6 #dee2e6 #fff;
+  }
+</style>
+
+<h1>書類一覧</h1>
+
+<%= link_to '新しい文書を追加', new_condo_document_path(@condo) %>
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <% DocumentCategory.all.reject { |category| category.id == 1 }.each_with_index do |category, index| %>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link <%= 'active' if index.zero? %>" id="<%= "category-tab-#{category.id}" %>" data-bs-toggle="tab" href="#<%= "category-#{category.id}" %>" role="tab" aria-controls="<%= "category-#{category.id}" %>" aria-selected="<%= 'true' if index.zero? %>"><%= category.name %></a>
+    </li>
+  <% end %>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+  <% DocumentCategory.all.reject { |category| category.id == 1 }.each_with_index do |category, index| %>
+    <div class="tab-pane fade <%= 'show active' if index.zero? %>" id="<%= "category-#{category.id}" %>" role="tabpanel" aria-labelledby="<%= "category-tab-#{category.id}" %>">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>タイトル</th>
+            <th>アップロード日</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @documents.select { |d| d.category_id.to_i == category.id }.each do |document| %>
+            <tr>
+              <td>
+                <%= link_to document.title, url_for(document.file), target: '_blank', rel: 'noopener noreferrer' if document.file.attached? %>
+              </td>
+              <td>
+                <%= document.created_at.strftime("%Y年%m月%d日") %>
+              </td>
+              <td>
+                <!-- 他の操作ボタンがあればここに配置 -->
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+
+
