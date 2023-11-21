@@ -374,27 +374,3 @@ comments.each do |comment|
   )
 end
 
-# ---書類---
-documents_to_upload = [
-  { filename: '管理委託契約サンプル.pdf', title: '第13期管理委託契約書', category_id: 6 },
-  { filename: '管理規約.pdf', title: '管理規約', category_id: 7 },
-  { filename: '総会資料サンプル.pdf', title: '第13期通常総会資料', category_id: 2 },
-  { filename: '総会議事録サンプル.pdf', title: '第13期通常総会議事録', category_id: 3 },
-  { filename: '長期修繕計画サンプル.pdf', title: '長期修繕計画(第13期承認)', category_id: 9 },
-  { filename: '理事会資料サンプル.pdf', title: '第13期理事会資料', category_id: 4 },
-  { filename: '理事会議事録サンプル.pdf', title: '第13期理事会議事録', category_id: 5 }
-]
-
-documents_to_upload.each do |doc|
-  pdf_path = Rails.root.join('db', 'seeds', 'files', doc[:filename])
-
-  document = Document.new(
-    title: doc[:title],
-    category_id: doc[:category_id],
-    user: admin_user,
-    condo: condos[0]
-  )
-
-  document.file.attach(io: File.open(pdf_path), filename: doc[:filename], content_type: 'application/pdf')
-  document.save!
-end
