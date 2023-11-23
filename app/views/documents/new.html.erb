@@ -20,6 +20,17 @@
     <%= f.collection_select :category_id, DocumentCategory.all, :id, :name, {}, { class: "input-default", id: "category-id" } %>
   </div>
 
+<div class="form-group">
+  <div class="form-text-wrap">
+    <%= f.label :condo_id, 'マンションを選択', class: "form-text" %>
+    <span class="indispensable">必須</span>
+  </div>
+  <%= f.select :condo_id, options_for_select(
+    @condos_for_select,
+    @selected_condo_id),
+    { class: "input-default" } %>
+</div>
+
   <div class="form-group">
     <div class='form-text-wrap'>
       <label class="form-text">ファイル</label>
