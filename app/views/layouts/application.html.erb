@@ -47,7 +47,6 @@
 
           <% if current_user.admin? %>
             <%= link_to "管理者画面", admin_root_path, class: "btn btn-success", role: "button" %>
-
             <div class="btn-group">
               <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
@@ -58,6 +57,7 @@
                 <%= link_to "区分所有者登録", new_condo_user_registration_path, data: { turbo: false }, class: "dropdown-item" %>
                 <%= link_to "社員登録", new_user_registration_path, data: { turbo: false }, class: "dropdown-item" %>
                 <%= link_to "マンション登録", new_condo_path, data: { turbo: false }, class: "dropdown-item" %>
+                <%= link_to "書類登録", new_document_path, class: "dropdown-item" %>
               </ul>
             </div>
           <% elsif current_user.manage? %>
@@ -70,6 +70,7 @@
               <ul class="dropdown-menu">
                 <%= link_to "区分所有者登録", new_condo_user_registration_path, data: { turbo: false }, class: "dropdown-item" %>
                 <%= link_to "マンション登録", new_condo_path, data: { turbo: false }, class: "dropdown-item" %>
+                <%= link_to "書類登録", new_document_path, class: "dropdown-item" %>
               </ul>
             </div>
           <% elsif current_user.employee? %>
