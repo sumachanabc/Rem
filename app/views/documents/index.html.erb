@@ -8,8 +8,6 @@
 
 <h1>書類一覧</h1>
 
-<%= link_to '新しい文書を追加', new_condo_document_path(@condo) %>
-
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <% DocumentCategory.all.reject { |category| category.id == 1 }.each_with_index do |category, index| %>
     <li class="nav-item" role="presentation">

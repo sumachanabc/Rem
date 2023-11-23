@@ -13,6 +13,16 @@
         </div>
         <div class="col">
           <div class="card shadow-sm">
+            <%= link_to condo_documents_path(@condo) do %>
+              <%= image_tag 'シンプルな書類ファイル.png',alt: '書類', class: 'bd-placeholder-img card-img-top top-icon' %>
+            <% end %>
+            <div class="card-body">
+              <p class="card-text">書類</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
             <%= link_to new_condo_condo_user_post_path(condo_id: current_condo_user.condo.id) do %>
               <%= image_tag 'テレフォンオペレーター.png', alt: 'お問い合わせはこちら', class: 'bd-placeholder-img card-img-top top-icon' %>
             <% end %>
