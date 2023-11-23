@@ -22,9 +22,10 @@ Rails.application.routes.draw do
       end
       resources :condo_user_post_replies, only: [:create, :update]
     end
-
-    resources :documents, only: [:index, :new, :create]
+    resources :documents, only: [:index] # ネストされたルーティング
   end
+
+  resources :documents, only: [:new, :create] # 非ネストされたルーティング
 
   resources :notifications do
     member do
