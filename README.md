@@ -17,7 +17,7 @@
 相談機能及びコメント機能に対する通知機能を実装しました。
 
 2023/11/18  
-書類アップロード機能(pdf)を実装しました(仮)。
+書類アップロード機能(pdf)を実装しました。
 
 ## URL
 
@@ -181,6 +181,10 @@ email はマンション毎にアルファベットの a~e まで割り振って
 
 [![区分所有者ログイン、マンション情報表示](https://i.gyazo.com/80b6bf645e6b07ae62389f2b0d132ffe.gif)](https://gyazo.com/80b6bf645e6b07ae62389f2b0d132ffe)
 
+### マンションの書類閲覧機能
+
+[![書類一覧表示](https://i.gyazo.com/2066da662dd049982fd5cb96942638f6.gif)](https://gyazo.com/2066da662dd049982fd5cb96942638f6)
+
 ### 権限のない社員で区分所有者登録画面へアクセス
 
 [![権限のない社員で区分所有者登録画面へアクセス](https://i.gyazo.com/c982efdd1bb54cfeaee50ae53165956a.gif)](https://gyazo.com/c982efdd1bb54cfeaee50ae53165956a)
@@ -211,7 +215,7 @@ email はマンション毎にアルファベットの a~e まで割り振って
 
 ## データベース設計
 
-[![Image from Gyazo](https://i.gyazo.com/5909a29f7c205bc00e74bb57e7f30aab.png)](https://gyazo.com/5909a29f7c205bc00e74bb57e7f30aab)
+[![Image from Gyazo](https://i.gyazo.com/ff64a48dea5e591e72c85bb1cb3c85b6.png)](https://gyazo.com/ff64a48dea5e591e72c85bb1cb3c85b6)
 
 ### Users テーブル
 
@@ -338,9 +342,23 @@ email はマンション毎にアルファベットの a~e まで割り振って
 - belongs_to :condo_user_post
 - belongs_to :condo_user_post_reply
 
+### Documents テーブル
+
+| Column      | Type       | Options                        |
+| ----------- | ---------- | ------------------------------ |
+| user        | references | null: false, foreign_key: true |
+| condo       | references | null: false, foreign_key: true |
+| title       | string     | null: false                    |
+| category_id | string     | null: false                    |
+
+#### Association
+
+- belongs_to :user
+- belongs_to :condo
+
 ## 画面遷移図
 
-[![Image from Gyazo](https://i.gyazo.com/4971356acf029be6403edf8731d1b8dd.png)](https://gyazo.com/4971356acf029be6403edf8731d1b8dd)
+[![Image from Gyazo](https://i.gyazo.com/d2d78d5a2bc2f3de946415e5a17414ff.png)](https://gyazo.com/d2d78d5a2bc2f3de946415e5a17414ff)
 
 ## 開発環境
 
