@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_16_101528) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_25_153413) do
   create_table "active_admin_comments", charset: "utf8", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -108,27 +108,39 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_16_101528) do
     t.integer "basement_floor"
     t.integer "total_number_of_unit", null: false
     t.integer "completion_year", null: false
-    t.string "structure_id", null: false
+    t.integer "structure_id", null: false
     t.float "site_area", null: false
     t.float "total_floor_area", null: false
-    t.integer "parking_space"
-    t.integer "bicycle_parking_space"
     t.float "maintenance_fee", null: false
     t.float "repair_reserve_fund", null: false
     t.string "management_company_name", null: false
     t.string "management_company_postal_code", null: false
     t.string "management_company_address", null: false
     t.string "management_company_phone_number", null: false
-    t.string "management_type_id", null: false
+    t.integer "management_type_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_condos_on_user_id"
   end
 
+  create_table "contracts", charset: "utf8", force: :cascade do |t|
+    t.integer "vehicle_type_id"
+    t.string "vehicle_model_code"
+    t.string "vehicle_number"
+    t.date "start_date", null: false
+    t.date "end_date"
+    t.bigint "condo_user_id", null: false
+    t.bigint "parking_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["condo_user_id"], name: "index_contracts_on_condo_user_id"
+    t.index ["parking_id"], name: "index_contracts_on_parking_id"
+  end
+
   create_table "documents", charset: "utf8", force: :cascade do |t|
     t.string "title", null: false
-    t.string "category_id", null: false
+    t.integer "category_id", null: false
     t.bigint "condo_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -152,6 +164,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_16_101528) do
     t.index ["condo_user_post_reply_id"], name: "index_notifications_on_condo_user_post_reply_id"
     t.index ["visited_type", "visited_id"], name: "index_notifications_on_visited"
     t.index ["visitor_type", "visitor_id"], name: "index_notifications_on_visitor"
+  end
+
+  create_table "parkings", charset: "utf8", force: :cascade do |t|
+    t.bigint "condo_id", null: false
+    t.string "parking_number", null: false
+    t.integer "vehicle_type_id", null: false
+    t.integer "parking_type_id", null: false
+    t.boolean "roof", default: false, null: false
+    t.integer "special_category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["condo_id"], name: "index_parkings_on_condo_id"
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
@@ -181,8 +205,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_16_101528) do
   add_foreign_key "condo_users", "condos"
   add_foreign_key "condo_users", "users"
   add_foreign_key "condos", "users"
+  add_foreign_key "contracts", "condo_users"
+  add_foreign_key "contracts", "parkings"
   add_foreign_key "documents", "condos"
   add_foreign_key "documents", "users"
   add_foreign_key "notifications", "condo_user_post_replies"
   add_foreign_key "notifications", "condo_user_posts"
+  add_foreign_key "parkings", "condos"
 end
