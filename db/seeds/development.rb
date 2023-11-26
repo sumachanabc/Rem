@@ -90,8 +90,6 @@ condos << Condo.create!(
   management_company_postal_code: management_company_postal_code,
   management_company_address: management_company_address,
   management_company_phone_number: management_company_phone_number,
-  parking_space: nil,
-  bicycle_parking_space: 20,
   maintenance_fee: 200.0,
   repair_reserve_fund: 150.0,
   user_id: employee_users[0].id
@@ -113,8 +111,6 @@ condos << Condo.create!(
   management_company_postal_code: management_company_postal_code,
   management_company_address: management_company_address,
   management_company_phone_number: management_company_phone_number,
-  parking_space: nil,
-  bicycle_parking_space: 15,
   maintenance_fee: 180.0,
   repair_reserve_fund: 120.0,
   user_id: employee_users[0].id
@@ -136,8 +132,6 @@ condos << Condo.create!(
   management_company_postal_code: management_company_postal_code,
   management_company_address: management_company_address,
   management_company_phone_number: management_company_phone_number,
-  parking_space: nil,
-  bicycle_parking_space: 10,
   maintenance_fee: 190.0,
   repair_reserve_fund: 130.0,
   user_id: employee_users[0].id
@@ -159,8 +153,6 @@ condos << Condo.create!(
   management_company_postal_code: management_company_postal_code,
   management_company_address: management_company_address,
   management_company_phone_number: management_company_phone_number,
-  parking_space: nil,
-  bicycle_parking_space: 12,
   maintenance_fee: 200.0,
   repair_reserve_fund: 140.0,
   user_id: employee_users[1].id
@@ -182,8 +174,6 @@ condos << Condo.create!(
   management_company_postal_code: management_company_postal_code,
   management_company_address: management_company_address,
   management_company_phone_number: management_company_phone_number,
-  parking_space: nil,
-  bicycle_parking_space: 14,
   maintenance_fee: 180.0,
   repair_reserve_fund: 120.0,
   user_id: employee_users[1].id

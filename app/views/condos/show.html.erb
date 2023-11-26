@@ -28,11 +28,11 @@
         </div>
         <div class="col">
           <div class="card shadow-sm">
-            <%= link_to root_path do %>
-              <%= image_tag '自転車のイラスト1.png',alt: '駐輪場・駐車場情報', class: 'bd-placeholder-img card-img-top top-icon' %>
+            <%= link_to condo_parkings_path(@condo) do %>
+              <%= image_tag '自転車のイラスト1.png',alt: '各種区画情報', class: 'bd-placeholder-img card-img-top top-icon' %>
             <% end %>
             <div class="card-body">
-              <p class="card-text">駐輪場・駐車場情報</p>
+              <p class="card-text">各種区画情報</p>
 
             </div>
           </div>

@@ -1,0 +1,65 @@
+<style>
+  .nav-tabs .nav-link.active {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #dee2e6 #dee2e6 #fff;
+  }
+</style>
+
+<h1><%= @condo.condo_name %>の各種区画情報一覧</h1>
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <% { '駐車場' => 2, '駐輪場' => 3, 'バイク置き場' => 4 }.each_with_index do |(category, _), index| %>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link <%= 'active' if index.zero? %>" id="<%= "category-tab-#{index}" %>" data-bs-toggle="tab" href="#<%= "category-#{index}" %>" role="tab" aria-controls="<%= "category-#{index}" %>" aria-selected="<%= 'true' if index.zero? %>"><%= category %></a>
+    </li>
+  <% end %>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+  <% { '駐車場' => 2, '駐輪場' => 3, 'バイク置き場' => 4 }.each_with_index do |(category, vehicle_type_id), index| %>
+    <div class="tab-pane fade <%= 'show active' if index.zero? %>" id="<%= "category-#{index}" %>" role="tabpanel" aria-labelledby="<%= "category-tab-#{index}" %>">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>区画番号</th>
+            <th>区画情報</th>
+            <th>契約者情報</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @parkings.sort_by(&:parking_number).select { |parking| parking.vehicle_type_id == vehicle_type_id }.each do |parking| %>
+            <tr>
+              <td><%= parking.parking_number %></td>
+              <td>
+                <% parking_type_badge_class = parking.parking_type.name.include?('平置き') ? 'bg-info' : 'bg-warning' %>
+                <span class="badge <%= parking_type_badge_class %>"><%= parking.parking_type.name %></span>
+
+                <% roof_badge_class = parking.roof ? 'bg-success' : 'bg-danger' %>
+                <span class="badge <%= roof_badge_class %>"><%= parking.roof ? '屋根あり' : '屋根なし' %></span>
+
+                <% if parking.special_category&.name != '---' %>
+                  <span class="badge bg-primary"><%= parking.special_category.name %></span>
+                <% end %>
+              </td>
+              <td>
+                <!-- ここに契約者情報を表示 -->
+              </td>
+              <td>
+                <!-- その他の操作 -->
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+
+
+

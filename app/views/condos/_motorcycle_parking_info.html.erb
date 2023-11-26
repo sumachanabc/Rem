@@ -1,0 +1,14 @@
+<% motorcycle_parking_info = @condo.parkings.where(vehicle_type_id: VehicleType.find_by(name: 'バイク').id) %>
+<% if motorcycle_parking_info.exists? %>
+  <tr>
+    <th scope="row" colspan="2">バイク置き場情報</th>
+  </tr>
+  <% motorcycle_parking_info.each do |parking| %>
+    <tr>
+      <td><%= parking.parking_number %></td>
+      <td><%= ParkingType.find(parking.parking_type_id).name %></td>
+      <td><%= parking.roof ? '屋根あり' : '屋根なし' %></td>
+      <td><%= SpecialCategory.find(parking.special_category_id).name if parking.special_category_id %></td>
+    </tr>
+  <% end %>
+<% end %>
