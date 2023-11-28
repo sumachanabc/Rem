@@ -8,6 +8,7 @@ class Condo < ApplicationRecord
   has_many :condo_user_posts
   has_many :documents, dependent: :destroy
   has_many :parkings, dependent: :destroy
+  has_many :contracts, dependent: :destroy
 
   # バリデーション
   with_options presence: true do
