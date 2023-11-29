@@ -1,0 +1,79 @@
+<h2>新しい区画契約を登録</h2>
+
+<%= form_with model: @contract, local: true, data: { turbo: false } do |f| %>
+  <%= f.hidden_field :condo_id, value: @condo_id %>
+
+  <%= render 'shared/error_messages', model: f.object %>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :condo_user_id, '区分所有者を選択', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.select :condo_user_id, options_for_select(
+      @condo_users_for_select,
+      @selected_condo_user_id),
+      { class: "input-default" } %>
+  </div>
+
+  <div class="form-group">
+    <div class='form-text-wrap'>
+      <label class="form-text">車両タイプ</label>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.collection_select :vehicle_type_id, VehicleType.all, :id, :name, {}, { class: "input-default", id: "vehicle_type_id" } %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <%= f.label :parking_id, '区画を選択', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.select :parking_id, options_for_select(
+      @parkings_for_select,
+      @selected_parking_id),
+      { class: "input-default" } %>
+  </div>
+
+  <div class="form-group">
+    <div class='form-text-wrap'>
+      <%= f.label :vehicle_model_code, '車両の型式', class: "form-text" %>
+    </div>
+    <%= f.text_field :vehicle_model_code, class:"input-default", id:"vehicle_model_code", placeholder:"車両の型式を入力" %>
+  </div>
+
+  <div class="form-group">
+    <div class='form-text-wrap'>
+      <%= f.label :vehicle_number, '車両ナンバー', class: "form-text" %>
+    </div>
+    <%= f.text_field :vehicle_number, class:"input-default", id:"vehicle_number", placeholder:"車両ナンバーを入力" %>
+  </div>
+
+  <div class="form-group">
+    <div class='form-text-wrap'>
+      <%= f.label :start_date, '契約開始日', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.date_field :start_date, class:"input-default", id:"start_date" %>
+  </div>
+
+  <div class="form-group">
+    <div class='form-text-wrap'>
+      <%= f.label :end_date, '契約終了日', class: "form-text" %>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.date_field :end_date, class:"input-default", id:"end_date" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "保存", class: "btn-primary" %>
+  </div>
+<% end %>
+
+<% if flash[:error].present? %>
+  <div class="alert alert-danger">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+
