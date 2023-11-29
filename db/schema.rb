@@ -125,15 +125,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_25_153413) do
   end
 
   create_table "contracts", charset: "utf8", force: :cascade do |t|
-    t.integer "vehicle_type_id"
-    t.string "vehicle_model_code"
     t.string "vehicle_number"
+    t.integer "vehicle_type_id", null: false
+    t.string "vehicle_model_code"
     t.date "start_date", null: false
-    t.date "end_date"
+    t.date "end_date", null: false
+    t.bigint "condo_id", null: false
     t.bigint "condo_user_id", null: false
     t.bigint "parking_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["condo_id"], name: "index_contracts_on_condo_id"
     t.index ["condo_user_id"], name: "index_contracts_on_condo_user_id"
     t.index ["parking_id"], name: "index_contracts_on_parking_id"
   end
@@ -206,6 +208,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_25_153413) do
   add_foreign_key "condo_users", "users"
   add_foreign_key "condos", "users"
   add_foreign_key "contracts", "condo_users"
+  add_foreign_key "contracts", "condos"
   add_foreign_key "contracts", "parkings"
   add_foreign_key "documents", "condos"
   add_foreign_key "documents", "users"

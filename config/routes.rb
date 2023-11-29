@@ -24,10 +24,17 @@ Rails.application.routes.draw do
     end
     resources :documents, only: [:index] # ネストされたルーティング
     resources :parkings, only: [:index, :show]
+    resources :contracts, only: [:index]
   end
 
   resources :documents, only: [:new, :create] # 非ネストされたルーティング
   resources :parkings, only: [:new, :create]
+
+  resources :contracts, only: [:new, :create] do
+    collection do
+      get 'select_condo'
+    end
+  end
 
   resources :notifications do
     member do

@@ -20,8 +20,10 @@
 書類アップロード機能(pdf)を実装しました。
 
 2023/11/26  
-駐車場、駐輪場、バイク置き場の区画情報を管理する機能を実装しました(仮)。  
-これに伴い、近日中に区画契約情報管理機能を実装予定です。
+駐車場、駐輪場、バイク置き場の区画情報を管理する機能を実装しました。
+
+2023/11/29  
+区画契約情報管理機能を実装しました。
 
 ## URL
 
@@ -398,11 +400,11 @@ email はマンション毎にアルファベットの a~e まで割り振って
 | ------------------ | ---------- | ------------------------------ |
 | condo_user         | references | null: false, foreign_key: true |
 | parking            | references | null: false, foreign_key: true |
-| vehicle_type_id    | integer    |                                |
+| vehicle_type_id    | integer    | null: false                    |
 | vehicle_model_code | string     |                                |
 | vehicle_number     | string     |                                |
 | start_date         | date       | null: false                    |
-| end_date           | date       |                                |
+| end_date           | date       | null: false                    |
 
 #### Association
 

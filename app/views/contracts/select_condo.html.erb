@@ -1,0 +1,5 @@
+<h2>マンションを選択</h2>
+<%= form_with url: new_contract_path, method: :get do %>
+  <%= select_tag :condo_id, options_from_collection_for_select(@condos, :id, :condo_name), prompt: "マンションを選択してください" %>
+  <%= submit_tag "選択" %>
+<% end %>
