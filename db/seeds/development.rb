@@ -12,6 +12,9 @@ admin_user = User.create!(
   role: 1
 )
 
+# adminユーザーのIDを取得
+admin_user_id = admin_user.id
+
 # manage
 manage_user = User.create!(
   first_name: '二郎',
@@ -389,4 +392,82 @@ documents_to_upload.each do |doc|
   document.save!
 end
 
+# ---区画情報---
+# 各マンションに対して駐輪場区画1-10番、駐車場1,2番を全て平置きで特別カテゴリなしで生成
+condos.each do |condo|
+  # 駐輪場区画1-10番の初期データ
+  (1..10).each do |number|
+    Parking.create!(
+      condo_id: condo.id,
+      parking_number: number.to_s,
+      vehicle_type_id: 3,
+      monthly_fee: 300,
+      parking_type_id: 2,
+      roof: false,
+      special_category_id: nil,
+      user_id: admin_user_id
+    )
+  end
+
+  # 駐車場1,2番の初期データ
+  (1..2).each do |number|
+    Parking.create!(
+      condo_id: condo.id,
+      parking_number: number.to_s,
+      vehicle_type_id: 2,
+      monthly_fee: 15000,
+      parking_type_id: 2,
+      roof: false,
+      special_category_id: nil,
+      user_id: admin_user_id
+    )
+  end
+end
+
+# ‐‐‐区画契約‐‐‐
+
+car_model_codes = ['DBA-ZC6', 'UA-NCP31', 'GH-ANH10', 'LDA-GDJ150W', 'CBA-R35']
+
+condos.each do |condo|
+
+  start_date = Date.new(2023, 4, 1)
+  end_date = Date.new(2025, 3, 31)
+
+  # 駐輪場区画1-10番の契約データ作成
+  (1..10).each do |number|
+    parking = Parking.find_by(condo_id: condo.id, parking_number: number.to_s, vehicle_type_id: 3)
+    Contract.create!(
+      vehicle_number: nil,
+      vehicle_type_id: parking.vehicle_type_id,
+      vehicle_model_code: nil,
+      start_date: start_date,
+      end_date: end_date,
+      condo_id: condo.id,
+      condo_user_id: condo.condo_users.sample.id,
+      parking_id: parking.id,
+      user_id: admin_user_id
+    )
+  end
+
+  # 駐車場1,2番の契約データ作成
+  (1..2).each do |number|
+    parking = Parking.find_by(condo_id: condo.id, parking_number: number.to_s, vehicle_type_id: 2)
+
+    vehicle_number = "東京 #{rand(1000..9999)}"
+    
+    vehicle_model_code = car_model_codes.sample
+
+    Contract.create!(
+      vehicle_number: vehicle_number,
+      vehicle_type_id: parking.vehicle_type_id,
+      vehicle_model_code: vehicle_model_code,
+      start_date: start_date,
+      end_date: end_date,
+      condo_id: condo.id,
+      condo_user_id: condo.condo_users.sample.id,
+      parking_id: parking.id,
+      user_id: admin_user_id
+    )
+  end
+end
 
