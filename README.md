@@ -19,6 +19,12 @@
 2023/11/18  
 書類アップロード機能(pdf)を実装しました。
 
+2023/11/26  
+駐車場、駐輪場、バイク置き場の区画情報を管理する機能を実装しました。
+
+2023/11/29  
+区画契約情報管理機能を実装しました。
+
 ## URL
 
 [https://rem-6zkh.onrender.com/](https://rem-6zkh.onrender.com/)
@@ -38,7 +44,10 @@ PASS：2222
 - 問い合わせデータ  
   後述するおすすめアカウントで確認できます。
 - 書類データ…マンション「サンコート」から閲覧できます。  
-  現在は後述するおすすめアカウントの管理会社側からのみ閲覧できます
+   マンションサンコートに登録してあります。  
+   後述するおすすめアカウントから閲覧できます
+- 駐車場などの区画情報及び契約情報  
+  管理会社 employee から閲覧できます。
 
 ## 閲覧時におすすめのアカウント
 
@@ -55,6 +64,15 @@ PASS：2222
 
 - email: a01@example.com
 - password: 1a1a1a
+
+## 簡単な使い方
+
+- 管理会社 employee を使用する場合  
+  ログインしたら最初に右上のプルダウンメニューになっている担当物件からマンションを選択してください。  
+  画面左上に選択したマンション名が出ていればそのマンションの情報トップページにアクセスしている状態です。そこから好きなマンション情報にアクセスしてください。
+
+- マンション区分所有者を使用する場合  
+  ログインしたらそのユーザーの居住するマンション情報や管理会社への問い合わせができます。
 
 ## テスト用アカウント一覧
 
@@ -129,6 +147,7 @@ email はマンション毎にアルファベットの a~e まで割り振って
 - 管理者画面でのデータ一括管理
 - ユーザーやマンションデータの CSV 出力
 - マンション書類の登録(PDF)、閲覧、ダウンロード
+- マンションに存在する駐車場、駐輪場、バイク置き場の区画情報の閲覧
 
 ## 利用方法
 
@@ -146,7 +165,7 @@ email はマンション毎にアルファベットの a~e まで割り振って
 1. 区分所有者でログインし、自身が居住するマンションの情報が閲覧できます。
 2. マンションのことについてお問い合わせ機能を利用して相談できます。
 
-### アプリケーションを作成した背景
+## アプリケーションを作成した背景
 
 前職の社内顧客管理システムを使用していて、日々お客様より受ける相談履歴を残せる機能がなく、
 そういう機能があればいいのにと思うことがあったので作ってみることにしました。
@@ -199,6 +218,10 @@ email はマンション毎にアルファベットの a~e まで割り振って
 
 [![書類一覧表示](https://i.gyazo.com/2066da662dd049982fd5cb96942638f6.gif)](https://gyazo.com/2066da662dd049982fd5cb96942638f6)
 
+### マンションの各種区画情報
+
+[![Image from Gyazo](https://i.gyazo.com/28d3a5810b93e7689dcbe29510628057.png)](https://gyazo.com/28d3a5810b93e7689dcbe29510628057)
+
 ### 権限のない社員で区分所有者登録画面へアクセス
 
 [![権限のない社員で区分所有者登録画面へアクセス](https://i.gyazo.com/c982efdd1bb54cfeaee50ae53165956a.gif)](https://gyazo.com/c982efdd1bb54cfeaee50ae53165956a)
@@ -217,19 +240,13 @@ email はマンション毎にアルファベットの a~e まで割り振って
 
 ## 今後実装したい機能
 
-- マンション登録データの編集、削除※管理者画面以外で
-- 区分所有者データの詳細表示(マイページ)、編集、削除※管理者画面以外で
-- 社員データの詳細表示(顧客向けプロフ)、編集、削除
-- 駐輪場駐車場管理
-- 簡易投票(アンケート)
-- 投票(総会)
-- マンション毎のチャット/掲示板
-- 会計機能
+- 投票(アンケート、総会)
 - 修繕履歴
+- 駐車場等の区画契約情報管理機能
 
 ## データベース設計
 
-[![Image from Gyazo](https://i.gyazo.com/ff64a48dea5e591e72c85bb1cb3c85b6.png)](https://gyazo.com/ff64a48dea5e591e72c85bb1cb3c85b6)
+[![Image from Gyazo](https://i.gyazo.com/1190abccba676d94f8fc89357fafcb48.png)](https://gyazo.com/1190abccba676d94f8fc89357fafcb48)
 
 ### Users テーブル
 
@@ -262,18 +279,16 @@ email はマンション毎にアルファベットの a~e まで割り振って
 | basement_floor                  | integer    |                                |
 | total_number_of_unit            | integer    | null: false                    |
 | completion_year                 | integer    | null: false                    |
-| structure_id                    | string     | null: false                    |
+| structure_id                    | integer    | null: false                    |
 | site_area                       | float      | null: false                    |
 | total_floor_area                | float      | null: false                    |
-| parking_space                   | integer    |                                |
-| bicycle_parking_space           | integer    |                                |
 | maintenance_fee                 | float      | null: false                    |
 | repair_reserve_fund             | float      | null: false                    |
 | management_company_name         | string     | null: false                    |
 | management_company_postal_code  | string     | null: false                    |
 | management_company_address      | string     | null: false                    |
 | management_company_phone_number | string     | null: false                    |
-| management_type_id              | string     | null: false                    |
+| management_type_id              | integer    | null: false                    |
 
 #### Association
 
@@ -363,21 +378,53 @@ email はマンション毎にアルファベットの a~e まで割り振って
 | user        | references | null: false, foreign_key: true |
 | condo       | references | null: false, foreign_key: true |
 | title       | string     | null: false                    |
-| category_id | string     | null: false                    |
+| category_id | integer    | null: false                    |
 
 #### Association
 
 - belongs_to :user
 - belongs_to :condo
 
+### Parkings テーブル
+
+| Column              | Type       | Options                        |
+| ------------------- | ---------- | ------------------------------ |
+| condo               | references | null: false, foreign_key: true |
+| parking_number      | string     | null: false                    |
+| vehicle_type_id     | integer    | null: false                    |
+| parking_type_id     | integer    | null: false                    |
+| roof                | boolean    | null: false, default: false    |
+| special_category_id | integer    |                                |
+
+#### Association
+
+- belongs_to :condo
+
+### Contracts テーブル
+
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| condo_user         | references | null: false, foreign_key: true |
+| parking            | references | null: false, foreign_key: true |
+| vehicle_type_id    | integer    | null: false                    |
+| vehicle_model_code | string     |                                |
+| vehicle_number     | string     |                                |
+| start_date         | date       | null: false                    |
+| end_date           | date       | null: false                    |
+
+#### Association
+
+- belongs_to :condo_user
+- belongs_to :parking
+
 ## 画面遷移図
 
-[![Image from Gyazo](https://i.gyazo.com/d2d78d5a2bc2f3de946415e5a17414ff.png)](https://gyazo.com/d2d78d5a2bc2f3de946415e5a17414ff)
+[![Image from Gyazo](https://i.gyazo.com/6f2b243f601d42465141bc084b1db3c7.png)](https://gyazo.com/6f2b243f601d42465141bc084b1db3c7)
 
 ## 開発環境
 
 - Ruby
-- Ruby on Rails
+- Ruby on Rails, JavaScript
 - MySQL
 - Github
 - Render
@@ -400,6 +447,7 @@ $ http://localhost:3000
 
 - 権限管理を導入して実務を意識
 - 管理者画面実装
+- admin や manage のみ新規登録などのアクションを許可
 - エラーハンドリング日本語化
 - レスポンシブ対応
 - 一部入力項目をアクティブハッシュで実装

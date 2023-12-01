@@ -4,7 +4,13 @@
     background-color: #007bff;
     border-color: #dee2e6 #dee2e6 #fff;
   }
+
+  /* テーブルのセル間隔を狭めるスタイル */
+  .table td {
+    padding: 0.5rem; /* ここで間隔を調整 */
+  }
 </style>
+
 
 <h1><%= @condo.condo_name %>の各種区画情報一覧</h1>
 
@@ -30,7 +36,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @parkings.sort_by(&:parking_number).select { |parking| parking.vehicle_type_id == vehicle_type_id }.each do |parking| %>
+          <% @parkings.sort_by { |parking| parking.parking_number.to_i }.select { |parking| parking.vehicle_type_id == vehicle_type_id }.each do |parking| %>
             <tr>
               <td><%= parking.parking_number %></td>
               <td><%= parking.monthly_fee %>円</td>
@@ -41,12 +47,19 @@
                 <% roof_badge_class = parking.roof ? 'bg-success' : 'bg-danger' %>
                 <span class="badge <%= roof_badge_class %>"><%= parking.roof ? '屋根あり' : '屋根なし' %></span>
 
-                <% if parking.special_category&.name != '---' %>
+                <% if parking.special_category.present? && parking.special_category.name != '---' %>
                   <span class="badge bg-primary"><%= parking.special_category.name %></span>
                 <% end %>
               </td>
               <td>
-                <!-- ここに契約者情報を表示 -->
+                <% contract = parking.contracts.find_by("start_date <= ? AND end_date >= ?", Date.today, Date.today) %>
+                <% if contract.present? %>
+                  <span class="badge bg-secondary badge-contract-info">部屋番号: <%= contract.condo_user.room_number %></span>
+                  <span class="badge bg-secondary badge-contract-info">氏名: <%= "#{contract.condo_user.condo_user_last_name} #{contract.condo_user.condo_user_first_name}" %></span>
+                  <span class="badge bg-success badge-contract-info">契約期間: <%= contract.start_date %> から <%= contract.end_date %></span>
+                <% else %>
+                  <p>契約なし</p>
+                <% end %>
               </td>
               <td>
                 <!-- その他の操作 -->
