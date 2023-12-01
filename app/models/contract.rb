@@ -1,5 +1,6 @@
 class Contract < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :user
   belongs_to :condo
   belongs_to :condo_user
   belongs_to :parking

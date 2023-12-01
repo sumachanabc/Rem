@@ -130,6 +130,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_25_153413) do
     t.string "vehicle_model_code"
     t.date "start_date", null: false
     t.date "end_date", null: false
+    t.bigint "user_id", null: false
     t.bigint "condo_id", null: false
     t.bigint "condo_user_id", null: false
     t.bigint "parking_id", null: false
@@ -138,6 +139,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_25_153413) do
     t.index ["condo_id"], name: "index_contracts_on_condo_id"
     t.index ["condo_user_id"], name: "index_contracts_on_condo_user_id"
     t.index ["parking_id"], name: "index_contracts_on_parking_id"
+    t.index ["user_id"], name: "index_contracts_on_user_id"
   end
 
   create_table "documents", charset: "utf8", force: :cascade do |t|
@@ -169,15 +171,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_25_153413) do
   end
 
   create_table "parkings", charset: "utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.bigint "condo_id", null: false
     t.string "parking_number", null: false
     t.integer "vehicle_type_id", null: false
+    t.integer "monthly_fee", null: false
     t.integer "parking_type_id", null: false
     t.boolean "roof", default: false, null: false
     t.integer "special_category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["condo_id"], name: "index_parkings_on_condo_id"
+    t.index ["user_id"], name: "index_parkings_on_user_id"
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
@@ -210,9 +215,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_25_153413) do
   add_foreign_key "contracts", "condo_users"
   add_foreign_key "contracts", "condos"
   add_foreign_key "contracts", "parkings"
+  add_foreign_key "contracts", "users"
   add_foreign_key "documents", "condos"
   add_foreign_key "documents", "users"
   add_foreign_key "notifications", "condo_user_post_replies"
   add_foreign_key "notifications", "condo_user_posts"
   add_foreign_key "parkings", "condos"
+  add_foreign_key "parkings", "users"
 end

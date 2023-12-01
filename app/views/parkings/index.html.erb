@@ -29,6 +29,7 @@
         <thead>
           <tr>
             <th>区画番号</th>
+            <th>月額料金</th>
             <th>区画情報</th>
             <th>契約者情報</th>
             <th></th>
@@ -38,6 +39,7 @@
           <% @parkings.sort_by { |parking| parking.parking_number.to_i }.select { |parking| parking.vehicle_type_id == vehicle_type_id }.each do |parking| %>
             <tr>
               <td><%= parking.parking_number %></td>
+              <td><%= parking.monthly_fee %>円</td>
               <td>
                 <% parking_type_badge_class = parking.parking_type.name.include?('平置き') ? 'bg-info' : 'bg-warning' %>
                 <span class="badge <%= parking_type_badge_class %>"><%= parking.parking_type.name %></span>

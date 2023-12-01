@@ -17,6 +17,7 @@ class ContractsController < ApplicationController
 
   def create
     @contract = Contract.new(contract_params)
+    @contract.user = current_user
   
     condo_id = @contract.condo_id
     @condo_users_for_select = condo_users_for_select(condo_id)
