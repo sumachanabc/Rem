@@ -15,6 +15,7 @@ class ParkingsController < ApplicationController
   def create
     if current_user.admin? || current_user.manage?
       @parking = Parking.new(parking_params)
+      @parking.user = current_user
       @condos_for_select = condos_for_select
 
       if @parking.save
@@ -32,7 +33,7 @@ class ParkingsController < ApplicationController
   end
 
   def parking_params
-    params.require(:parking).permit(:parking_number, :vehicle_type_id, :parking_type_id, :roof, :special_category_id, :condo_id)
+    params.require(:parking).permit(:parking_number, :vehicle_type_id, :monthly_fee, :parking_type_id, :roof, :special_category_id, :condo_id)
   end
 
   def condos_for_select
