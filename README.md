@@ -6,6 +6,11 @@
 
 分譲マンション管理組合のサポートをするためのアプリです。マンション、区分所有者、社員等のデータ管理が可能です。
 
+## アプリケーションを作成した背景
+
+前職の社内顧客管理システムを使用していて、日々お客様より受ける相談履歴を残せる機能がなく、  
+そういう機能があればいいのにと思うことがあったので作ってみることにしました。
+
 ## アップデート情報
 
 2023/11/05  
@@ -165,11 +170,6 @@ email はマンション毎にアルファベットの a~e まで割り振って
 1. 区分所有者でログインし、自身が居住するマンションの情報が閲覧できます。
 2. マンションのことについてお問い合わせ機能を利用して相談できます。
 
-## アプリケーションを作成した背景
-
-前職の社内顧客管理システムを使用していて、日々お客様より受ける相談履歴を残せる機能がなく、
-そういう機能があればいいのにと思うことがあったので作ってみることにしました。
-
 ## 洗い出した要件
 
 [要件を定義したシート](https://docs.google.com/spreadsheets/d/1cUHJYNbNabmZ3tyBxqZC4g18f3W8ZzCIvhzf6Lt296o/edit#gid=982722306)
@@ -246,7 +246,7 @@ email はマンション毎にアルファベットの a~e まで割り振って
 
 ## データベース設計
 
-[![Image from Gyazo](https://i.gyazo.com/1190abccba676d94f8fc89357fafcb48.png)](https://gyazo.com/1190abccba676d94f8fc89357fafcb48)
+[![Image from Gyazo](https://i.gyazo.com/ae8197f9fb8dfccbfbc78539955fcabf.png)](https://gyazo.com/ae8197f9fb8dfccbfbc78539955fcabf)
 
 ### Users テーブル
 
@@ -419,7 +419,7 @@ email はマンション毎にアルファベットの a~e まで割り振って
 
 ## 画面遷移図
 
-[![Image from Gyazo](https://i.gyazo.com/6f2b243f601d42465141bc084b1db3c7.png)](https://gyazo.com/6f2b243f601d42465141bc084b1db3c7)
+[![Image from Gyazo](https://i.gyazo.com/d0d09e37bc87b20004268e7924f190be.png)](https://gyazo.com/d0d09e37bc87b20004268e7924f190be)
 
 ## 開発環境
 
