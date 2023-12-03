@@ -12,6 +12,9 @@ admin_user = User.create!(
   role: 1
 )
 
+# adminユーザーのIDを取得
+admin_user_id = admin_user.id
+
 # manage
 manage_user = User.create!(
   first_name: '二郎',
@@ -398,9 +401,11 @@ condos.each do |condo|
       condo_id: condo.id,
       parking_number: number.to_s,
       vehicle_type_id: 3,
+      monthly_fee: 300,
       parking_type_id: 2,
       roof: false,
-      special_category_id: nil
+      special_category_id: nil,
+      user_id: admin_user_id
     )
   end
 
@@ -410,9 +415,11 @@ condos.each do |condo|
       condo_id: condo.id,
       parking_number: number.to_s,
       vehicle_type_id: 2,
+      monthly_fee: 15000,
       parking_type_id: 2,
       roof: false,
-      special_category_id: nil
+      special_category_id: nil,
+      user_id: admin_user_id
     )
   end
 end
@@ -437,7 +444,8 @@ condos.each do |condo|
       end_date: end_date,
       condo_id: condo.id,
       condo_user_id: condo.condo_users.sample.id,
-      parking_id: parking.id
+      parking_id: parking.id,
+      user_id: admin_user_id
     )
   end
 
@@ -457,8 +465,8 @@ condos.each do |condo|
       end_date: end_date,
       condo_id: condo.id,
       condo_user_id: condo.condo_users.sample.id,
-      parking_id: parking.id
+      parking_id: parking.id,
+      user_id: admin_user_id
     )
   end
 end
-
